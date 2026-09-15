@@ -1,0 +1,15 @@
+variable,tipo_pandas,nulos,porcentaje_nulos,valores_distintos
+id_publicacion,string,0,0.0,4419
+id_extraido,string,0,0.0,4419
+categoria,string,0,0.0,5
+titulo,string,0,0.0,4188
+moneda,string,0,0.0,1
+precio_actual,Float64,0,0.0,1958
+numero_cuotas,Int64,60,1.3577732518669383,2
+monto_cuota,Float64,60,1.3577732518669383,2227
+cuotas_texto,string,60,1.3577732518669383,2337
+pagina,Int64,0,0.0,20
+posicion_pagina,Int64,0,0.0,60
+url_publicacion,string,0,0.0,4419
+url_fuente,string,0,0.0,95
+fecha_extraccion,datetime64[ns],0,0.0,99
