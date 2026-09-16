@@ -15,6 +15,7 @@ datos/limpios/mercadolibre_limpio.csv  dataset final: 4 412 ofertas, 14 columnas
 datos/calidad/                         evidencia: diagnóstico del crudo, calidad por columna, resumen por
                                        categoría, filas separadas, duplicados retirados, precios excluidos
 datos/calidad/robots/                  robots.txt descargados el día de la verificación
+documentos/Informe_Parte_I_DS3021_corregido.docx  informe completo con las 8 secciones (y su PDF)
 documentos/Dataset_preliminar.md       sección 4 del informe, generada por el notebook
 documentos/Diccionario de datos.docx   diccionario de datos, también en PDF
 documentos/Informe_secciones_pendientes.md  borrador de las secciones 1, 5, 7 y 8 del informe
@@ -58,20 +59,20 @@ del informe.
 | `robots.txt` verificado | Cumple | 1.2: reglas interpretadas por ruta, evidencia en `datos/calidad/robots/` |
 | `User-Agent` realista, `time.sleep()`, `try-except`, guardado incremental | Cumple | 1.1 y 1.5 |
 | Notebook documentado y reproducible | Cumple | `notebooks/ACD_Proyecto_Parte_I.ipynb` |
-| Informe en PDF con las ocho secciones | **Pendiente** | faltan las secciones 1, 5, 7 y 8: borrador en `documentos/Informe_secciones_pendientes.md` |
+| Informe en PDF con las ocho secciones | Cumple | `documentos/Informe_Parte_I_DS3021_corregido.docx` y su exportación en PDF |
 | Evidencias de participación por integrante | **Pendiente** | las reúne el equipo (20 % de la rúbrica) |
 
 ## Correspondencia con el informe
 
 | Sección del informe | Responsable | Artefacto en el repositorio | Estado |
 | --- | --- | --- | --- |
-| 1 Identificación | Parte 5 | `documentos/Informe_secciones_pendientes.md` | Borrador |
+| 1 Identificación | Parte 5 | `documentos/Informe_Parte_I_DS3021_corregido.docx` | Completado |
 | 2 Contexto · 3 Objetivos · 6 Fuentes de datos | Parte 1 | — (informe) | Completado |
 | Script de scraping y dataset crudo | Parte 2 | notebook § 1, `datos/crudos/` | Completado |
 | 4 Dataset preliminar | Parte 3 | notebook § 2, `datos/limpios/`, `datos/calidad/`, `documentos/Dataset_preliminar.md` | Completado |
 | Diccionario de datos | Parte 4 | `documentos/Diccionario de datos.docx` / `.pdf` | Completado |
-| 5 Alcance · 7 Estrategia · 8 Viabilidad | Parte 5 | `documentos/Informe_secciones_pendientes.md` | Borrador |
-| Ensamblaje del informe en Word y exportación a PDF | Parte 5 | — | Pendiente |
+| 5 Alcance · 7 Estrategia · 8 Viabilidad | Parte 5 | `documentos/Informe_Parte_I_DS3021_corregido.docx` | Completado |
+| Ensamblaje del informe en Word y exportación a PDF | Parte 5 | `documentos/Informe_Parte_I_DS3021_corregido.docx` / `.pdf` | Completado |
 
 ## Diferencias entre el informe y lo ejecutado
 
