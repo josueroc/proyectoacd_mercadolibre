@@ -9,14 +9,15 @@ en cinco búsquedas (celulares, laptops, televisores, refrigeradoras, audífonos
 ## Estructura
 
 ```
-datos/crudos/mercadolibre_raw.csv      CSV crudo del scraper (Parte 2), sin limpiar
+notebooks/ACD_Proyecto_Parte_I.ipynb   notebook único: sección 1 Extracción, sección 2 Limpieza
+datos/crudos/mercadolibre_raw.csv      CSV crudo del scraper, sin limpiar
 datos/limpios/mercadolibre_limpio.csv  dataset final: 4 412 ofertas, 14 columnas, UTF-8
-datos/calidad/                         evidencia: calidad por columna, resumen por categoría,
-                                       filas separadas, duplicados retirados, precios excluidos
-notebooks/ACD_PARTE_2.ipynb            extracción (Parte 2)
-notebooks/ACD_PARTE_3.ipynb            limpieza y control de calidad (Parte 3)
-documentos/Dataset_preliminar.md       sección 4 del informe, generada por la Parte 3
-documentos/Diccionario de datos.docx   diccionario de datos (Parte 4), también en PDF
+datos/calidad/                         evidencia: diagnóstico del crudo, calidad por columna, resumen por
+                                       categoría, filas separadas, duplicados retirados, precios excluidos
+datos/calidad/robots/                  robots.txt descargados el día de la verificación
+documentos/Dataset_preliminar.md       sección 4 del informe, generada por el notebook
+documentos/Diccionario de datos.docx   diccionario de datos, también en PDF
+documentos/Informe_secciones_pendientes.md  borrador de las secciones 1, 5, 7 y 8 del informe
 documentos/notas_integracion.md        ajustes pendientes entre el informe y lo realmente entregado
 indicaciones/                          enunciado y formatos oficiales del curso
 ```
@@ -25,41 +26,52 @@ indicaciones/                          enunciado y formatos oficiales del curso
 
 ```bash
 pip install -r requirements.txt
+jupyter notebook notebooks/ACD_Proyecto_Parte_I.ipynb
 ```
 
-**Limpieza (Parte 3) — reproduce el dataset entregado en unos segundos:**
+*Ejecutar todas las celdas.* Con la configuración de fábrica (`EJECUTAR_SCRAPER = False`, celda 1.1) el
+notebook **no vuelve a extraer**: verifica `robots.txt`, diagnostica el CSV crudo entregado y rehace toda la
+limpieza en segundos, regenerando `datos/limpios/`, `datos/calidad/` y `documentos/Dataset_preliminar.md`
+con un resultado idéntico byte a byte al versionado en el repositorio.
 
-```bash
-jupyter notebook notebooks/ACD_PARTE_3.ipynb
-```
+Las celdas de verificación son `assert`: si un requisito del enunciado deja de cumplirse (mínimo de 1 000
+registros, 6 atributos, IDs únicos, ≤ 10 % de nulos por columna, rutas permitidas por `robots.txt`), el
+notebook falla en lugar de exportar en silencio.
 
-Ejecutar todas las celdas. Lee `datos/crudos/mercadolibre_raw.csv` y regenera `datos/limpios/`,
-`datos/calidad/` y `documentos/Dataset_preliminar.md`. Las celdas de verificación son `assert`: si algún
-requisito del enunciado deja de cumplirse (mínimo de 1 000 registros, 6 atributos, IDs únicos, ≤ 10 % de
-nulos por columna), el notebook falla en lugar de exportar en silencio. Sobre el CSV entregado el
-resultado es idéntico byte a byte al versionado en el repositorio.
+Para rehacer la captura desde cero, poner `EJECUTAR_SCRAPER = True`. Requiere Chrome instalado, toma
+alrededor de media hora por las pausas entre peticiones, puede pedir una verificación manual en la ventana
+del navegador y **sobrescribe `datos/crudos/mercadolibre_raw.csv`**; para recuperar el archivo entregado:
+`git checkout datos/crudos`. Los precios cambian a diario, así que una nueva captura no reproduce las cifras
+del informe.
 
-**Extracción (Parte 2) — solo si se quiere rehacer la captura:**
+## Cumplimiento del enunciado
 
-```bash
-jupyter notebook notebooks/ACD_PARTE_2.ipynb
-```
+| Requisito | Estado | Dónde se verifica |
+| --- | --- | --- |
+| Técnica de scraping (BeautifulSoup / Scrapy / Selenium) | Cumple | Selenium + BeautifulSoup, secciones 1.3 y 1.4 |
+| ≥ 6 atributos, numéricos y categóricos | Cumple | 14 variables; `assert` en 2.5 |
+| Manejo de paginación | Cumple | 1.4 `avanzar_siguiente`, 1.5; patrón `_Desde_N` |
+| ≥ 1 000 registros | Cumple | 4 412 ofertas; `assert` en 1.7 y 2.5 |
+| ≤ 10 % de nulos por columna | Cumple | máximo 1,25 %; `assert` en 2.5 |
+| CSV en UTF-8 | Cumple | `datos/limpios/mercadolibre_limpio.csv` |
+| Diccionario de datos en el formato Word | Cumple | `documentos/Diccionario de datos.docx` |
+| `robots.txt` verificado | Cumple | 1.2: reglas interpretadas por ruta, evidencia en `datos/calidad/robots/` |
+| `User-Agent` realista, `time.sleep()`, `try-except`, guardado incremental | Cumple | 1.1 y 1.5 |
+| Notebook documentado y reproducible | Cumple | `notebooks/ACD_Proyecto_Parte_I.ipynb` |
+| Informe en PDF con las ocho secciones | **Pendiente** | faltan las secciones 1, 5, 7 y 8: borrador en `documentos/Informe_secciones_pendientes.md` |
+| Evidencias de participación por integrante | **Pendiente** | las reúne el equipo (20 % de la rúbrica) |
 
-Requiere Chrome instalado y toma alrededor de una hora por las pausas entre peticiones; el sitio puede
-pedir una verificación manual en la ventana del navegador. **Sobrescribe `datos/crudos/mercadolibre_raw.csv`**;
-para recuperar el archivo entregado: `git checkout datos/crudos`. Los precios de mercado cambian a diario,
-así que una nueva captura no reproduce las cifras del informe.
-
-## Correspondencia con el informe (Informe_Parte_I_DS3021)
+## Correspondencia con el informe
 
 | Sección del informe | Responsable | Artefacto en el repositorio | Estado |
 | --- | --- | --- | --- |
-| 1 Identificación | Parte 5 | — (informe) | Pendiente |
+| 1 Identificación | Parte 5 | `documentos/Informe_secciones_pendientes.md` | Borrador |
 | 2 Contexto · 3 Objetivos · 6 Fuentes de datos | Parte 1 | — (informe) | Completado |
-| Script de scraping y dataset crudo | Parte 2 | `notebooks/ACD_PARTE_2.ipynb`, `datos/crudos/` | Completado |
-| 4 Dataset preliminar | Parte 3 | `notebooks/ACD_PARTE_3.ipynb`, `datos/limpios/`, `datos/calidad/`, `documentos/Dataset_preliminar.md` | Completado |
+| Script de scraping y dataset crudo | Parte 2 | notebook § 1, `datos/crudos/` | Completado |
+| 4 Dataset preliminar | Parte 3 | notebook § 2, `datos/limpios/`, `datos/calidad/`, `documentos/Dataset_preliminar.md` | Completado |
 | Diccionario de datos | Parte 4 | `documentos/Diccionario de datos.docx` / `.pdf` | Completado |
-| 5 Alcance · 7 Estrategia · 8 Viabilidad · ensamblaje | Parte 5 | — (informe) | Pendiente |
+| 5 Alcance · 7 Estrategia · 8 Viabilidad | Parte 5 | `documentos/Informe_secciones_pendientes.md` | Borrador |
+| Ensamblaje del informe en Word y exportación a PDF | Parte 5 | — | Pendiente |
 
 ## Diferencias entre el informe y lo ejecutado
 
@@ -82,6 +94,6 @@ Registradas para que el informe final no afirme algo que el código no hace; el 
 
 ## Alcance ético
 
-Solo se extraen páginas públicas de resultados; no se recolecta información personal, se declara un
-User-Agent identificable, se mantiene una pausa entre peticiones y no se emplean técnicas de evasión de
-bloqueos. El dataset es de uso exclusivamente académico.
+Solo se extraen páginas públicas de resultados, verificadas contra `robots.txt` antes de cada ejecución; no
+se recolecta información personal, se declara un User-Agent identificable, se mantiene una pausa entre
+peticiones y no se emplean técnicas de evasión de bloqueos. El dataset es de uso exclusivamente académico.

@@ -26,16 +26,24 @@ el texto coincida con lo que el repositorio realmente contiene. Cada punto indic
    clave de deduplicación. Las URL originales se conservan para auditar esa decisión. Ya está documentado en
    el diccionario de datos.
 
-5. **Sección 6.5 (robots.txt).** La comprobación HTTP 200 del notebook no demuestra por sí sola que se
-   revisaron las reglas aplicables. El responsable de la adquisición debe conservar la evidencia de la
-   revisión que el informe declara.
+5. **Sección 6.5 (robots.txt).** Resuelto. La celda 1.2 del notebook ya no se limita a comprobar que el
+   archivo responda: descarga los `robots.txt` de `www.mercadolibre.com.pe` y del subdominio de listados
+   —que tiene reglas propias y no estaba contemplado en el informe—, los interpreta con
+   `urllib.robotparser` y verifica cada URL que el scraper visita, incluida una con el sufijo `_Desde_N`.
+   La evidencia fechada queda en `datos/calidad/robots/`. El informe puede citar esa verificación.
 
 6. **Sección 4.** Se copia de `documentos/Dataset_preliminar.md`, que genera el notebook de la Parte 3 con
    las cifras de la ejecución. Si se vuelve a ejecutar la limpieza, hay que volver a copiar el texto.
 
-7. **Sección 1 (Identificación) y secciones 5, 7 y 8.** Quedan a cargo de la Parte 5: completar nombres,
-   estados e índice, redactar Alcance, Estrategia y Viabilidad, y ensamblar el informe en el formato Word
-   oficial de `indicaciones/`.
+7. **Sección 1 (Identificación) y secciones 5, 7 y 8.** Hay un borrador en
+   `documentos/Informe_secciones_pendientes.md`, redactado a partir de lo que el repositorio contiene. La
+   Parte 5 debe revisarlo, añadir las evidencias de participación de cada integrante —que la rúbrica pondera
+   con 20 % y el borrador no puede sustituir—, volcarlo al formato Word oficial de `indicaciones/` junto con
+   la sección 4 y exportar el informe a PDF.
+
+8. **Notebook único.** Los dos notebooks se fusionaron en `notebooks/ACD_Proyecto_Parte_I.ipynb`, con las
+   secciones 1 Extracción y 2 Limpieza, tal como pide el entregable «Notebook o script (ipynb)». El informe
+   debe referirse a ese archivo y no a los notebooks separados por parte.
 
 ## Trazabilidad de la limpieza
 
