@@ -1,6 +1,6 @@
 categoria,registros,precio_minimo,precio_mediano,precio_promedio,precio_maximo
 audifonos,959,16.9,138.0,376.08,8959.0
-celulares,938,38.61,1635.0,3405.45,1250000.0
-laptops,929,459.0,4899.0,5832.38,29000.0
-refrigeradoras,648,2.0,1314.0,3342.72,999999.0
-televisores,945,10.0,1289.0,2007.44,99999.0
+celulares,937,38.61,1632.0,2075.04,9498.0
+laptops,928,459.0,4898.5,5807.42,24665.0
+refrigeradoras,646,52.0,1314.0,1805.08,20741.0
+televisores,942,25.0,1289.5,1907.65,59999.0
