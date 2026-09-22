@@ -30,20 +30,21 @@ pip install -r requirements.txt
 jupyter notebook notebooks/ACD_Proyecto_Parte_I.ipynb
 ```
 
-*Ejecutar todas las celdas.* Con la configuración de fábrica (`EJECUTAR_SCRAPER = False`, celda 1.1) el
-notebook **no vuelve a extraer**: verifica `robots.txt`, diagnostica el CSV crudo entregado y rehace toda la
-limpieza en segundos, regenerando `datos/limpios/`, `datos/calidad/` y `documentos/Dataset_preliminar.md`
-con un resultado idéntico byte a byte al versionado en el repositorio.
-
-Las celdas de verificación son `assert`: si un requisito del enunciado deja de cumplirse (mínimo de 1 000
-registros, 6 atributos, IDs únicos, ≤ 10 % de nulos por columna, rutas permitidas por `robots.txt`), el
-notebook falla en lugar de exportar en silencio.
-
-Para rehacer la captura desde cero, poner `EJECUTAR_SCRAPER = True`. Requiere Chrome instalado, toma
+*Ejecutar todas las celdas.* El notebook se entrega con `EJECUTAR_SCRAPER = True` (celda 1.1): **rehace la
+captura desde cero**, de modo que funciona aunque se envíe sin el CSV crudo. Requiere Chrome instalado, toma
 alrededor de media hora por las pausas entre peticiones, puede pedir una verificación manual en la ventana
 del navegador y **sobrescribe `datos/crudos/mercadolibre_raw.csv`**; para recuperar el archivo entregado:
 `git checkout datos/crudos`. Los precios cambian a diario, así que una nueva captura no reproduce las cifras
 del informe.
+
+Para trabajar sobre el CSV crudo ya entregado, poner `EJECUTAR_SCRAPER = False`: verifica `robots.txt`,
+diagnostica el crudo y rehace toda la limpieza en segundos, regenerando `datos/limpios/`, `datos/calidad/` y
+`documentos/Dataset_preliminar.md` con un resultado idéntico byte a byte al versionado en el repositorio. Es
+la forma recomendada para revisar o corregir el trabajo sin volver a visitar el sitio.
+
+Las celdas de verificación son `assert`: si un requisito del enunciado deja de cumplirse (mínimo de 1 000
+registros, 6 atributos, IDs únicos, ≤ 10 % de nulos por columna, rutas permitidas por `robots.txt`), el
+notebook falla en lugar de exportar en silencio.
 
 ## Cumplimiento del enunciado
 
