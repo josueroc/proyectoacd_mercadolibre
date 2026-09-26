@@ -1,0 +1,7 @@
+Datos de la extraccion de componentes de home office (EC1).
+Origen: repositorio ec1-scraping-mercadolibre, commit 70e1498 (16/09/2026).
+Extraccion: 15/09/2026, 23:34:39 a 23:44:02.
+homeoffice_ml_crudo.csv: 3680 registros, 17 columnas.
+homeoffice_ml_limpio.csv: 2936 publicaciones unicas, 17 columnas.
+homeoffice_final.csv: 2936 publicaciones, 13 columnas (se excluyen columnas con mas de 10 por ciento de nulos). Lo genera notebooks/generar_figuras.ipynb.
+EC1_scraping_mercadolibre.ipynb: notebook que produjo estos archivos.
