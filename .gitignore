@@ -222,3 +222,6 @@ datos/calidad/duplicados_detectados.csv
 
 # Archivos temporales de Word
 ~$*
+
+# Material de clase de consulta local (no se versiona)
+material-clase-2da-parte/
