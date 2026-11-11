@@ -37,8 +37,8 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 **Purpose**: Utilidades compartidas por los cinco notebooks
 
-- [ ] T005 Crear `notebooks/comun.py` con: rutas relativas a la raíz (`RAIZ`, `CRUDOS`, `HO_CRUDO`, `INTERMEDIO`, `EVIDENCIA`, `FINAL`, `FIGURAS`), `SEMILLA = 42`, estilo de figuras con texto ≥ 9 pt (NFR-006), `guardar_evidencia(df, archivo, etapa, motivo)` que añade las columnas `id_oferta`, `etapa`, `motivo`, y `verificar_balance(entrada, salida, *excluidos)` con `assert` (FR-026, NFR-004)
-- [ ] T006 Verificar que en `notebooks/comun.py` ninguna ruta apunte a `data/crudos/` ni a `homeoffice_ml_crudo.csv` en modo escritura (constitución IV)
+- [X] T005 Crear `notebooks/comun.py` con: rutas relativas a la raíz (`RAIZ`, `CRUDOS`, `HO_CRUDO`, `INTERMEDIO`, `EVIDENCIA`, `FINAL`, `FIGURAS`), `SEMILLA = 42`, estilo de figuras con texto ≥ 9 pt (NFR-006), `guardar_evidencia(df, archivo, etapa, motivo)` que añade las columnas `id_oferta`, `etapa`, `motivo`, y `verificar_balance(entrada, salida, *excluidos)` con `assert` (FR-026, NFR-004)
+- [X] T006 Verificar que en `notebooks/comun.py` ninguna ruta apunte a `data/crudos/` ni a `homeoffice_ml_crudo.csv` en modo escritura (constitución IV)
 
 **Checkpoint**: estructura y utilidades listas; las historias pueden comenzar
 
