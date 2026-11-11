@@ -5,6 +5,7 @@ datos: cada decisión de preprocesamiento vive, explicada, en su notebook.
 """
 import json
 import os
+import time
 from pathlib import Path
 
 # scikit-learn intenta contar núcleos físicos con una llamada que falla en algunos Windows; un valor fijo evita
@@ -153,7 +154,15 @@ def registrar_balance(etapa, entrada, salida, **excluidos):
 def guardar_figura(fig, nombre, pregunta, lectura):
     """Guarda la figura y registra la pregunta que responde y su lectura analítica (constitución VI)."""
     assert pregunta.strip() and lectura.strip(), 'Cada figura necesita su pregunta y su interpretación.'
-    fig.savefig(FIGURAS / f'{nombre}.png', facecolor='white')
+    # Windows puede bloquear un instante el PNG recién escrito (antivirus, indexador): se reintenta brevemente.
+    for intento in range(5):
+        try:
+            fig.savefig(FIGURAS / f'{nombre}.png', facecolor='white')
+            break
+        except OSError:
+            if intento == 4:
+                raise
+            time.sleep(1)
     registrar('figuras', **{nombre: {'pregunta': pregunta, 'lectura': lectura}})
     plt.show()
     print(f'Lectura: {lectura}')
