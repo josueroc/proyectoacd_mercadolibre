@@ -81,11 +81,11 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 **Independent Test**: Ejecutar `notebooks/03_integracion_y_reduccion.ipynb`; debe reportar ofertas solo en home office, solo en categorías y en ambas, con sumas que cuadran, y producir `data/final/integracion_ofertas_comunes.csv`.
 
-- [ ] T022 [US2] Identificación de entidades: comparar el cruce por código de catálogo (Parte I) frente al cruce por `id_oferta` y documentar la diferencia (formato de índice no coincidente) en `notebooks/03_integracion_y_reduccion.ipynb` (FR-013)
-- [ ] T023 [US2] Integrar por `id_oferta` en la dirección "agregar atributos" con `merge`: `precio_13_09`, `en_ambas_capturas` y `variacion_precio_pct`; prioridad de home office ante conflictos; justificar el rechazo de "agregar objetos" (FR-013, FR-014)
-- [ ] T024 [US2] Documentar los seis desafíos de U3_T4 (entidades, datos sin sentido, formato de índice, desajuste de agregación, duplicados, redundancia) con la evidencia de cada uno
-- [ ] T025 [US2] Reducción: retirar columnas constantes, vacías o redundantes con evidencia (chi-cuadrado entre categóricas, correlación entre numéricas; por ejemplo `moneda` constante y `ofrece_cuotas` frente a `numero_cuotas`) (FR-015)
-- [ ] T026 [US2] Exportar `data/intermedio/03_homeoffice_integrado.csv` y `data/final/integracion_ofertas_comunes.csv`; verificar con `assert` las sumas de los tres grupos y que "`precio_13_09` solo existe si `en_ambas_capturas`"
+- [X] T022 [US2] Identificación de entidades: comparar el cruce por código de catálogo (Parte I) frente al cruce por `id_oferta` y documentar la diferencia (formato de índice no coincidente) en `notebooks/03_integracion_y_reduccion.ipynb` (FR-013)
+- [X] T023 [US2] Integrar por `id_oferta` en la dirección "agregar atributos" con `merge`: `precio_13_09`, `en_ambas_capturas` y `variacion_precio_pct`; prioridad de home office ante conflictos; justificar el rechazo de "agregar objetos" (FR-013, FR-014)
+- [X] T024 [US2] Documentar los seis desafíos de U3_T4 (entidades, datos sin sentido, formato de índice, desajuste de agregación, duplicados, redundancia) con la evidencia de cada uno
+- [X] T025 [US2] Reducción: retirar columnas constantes, vacías o redundantes con evidencia (chi-cuadrado entre categóricas, correlación entre numéricas; por ejemplo `moneda` constante y `ofrece_cuotas` frente a `numero_cuotas`) (FR-015)
+- [X] T026 [US2] Exportar `data/intermedio/03_homeoffice_integrado.csv` y `data/final/integracion_ofertas_comunes.csv`; verificar con `assert` las sumas de los tres grupos y que "`precio_13_09` solo existe si `en_ambas_capturas`"
 
 **Checkpoint**: US1 y US2 funcionan de forma independiente
 

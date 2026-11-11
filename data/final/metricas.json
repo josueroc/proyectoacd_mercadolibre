@@ -34,6 +34,10 @@
       "entrada": 2715,
       "errores": 1,
       "salida": 2714
+    },
+    "03_homeoffice": {
+      "entrada": 2714,
+      "salida": 2714
     }
   },
   "faltantes": {
@@ -114,6 +118,14 @@
     "f02_precio_segun_faltante": {
       "lectura": "Sí. Las publicaciones sin reseñas tienen una mediana de S/ 597 frente a S/ 222 con reseñas: los productos caros se venden menos y acumulan menos opiniones. Imputar la calificación con un promedio asignaría a productos caros la reputación de los baratos.",
       "pregunta": "¿El faltante se relaciona con el precio de la publicación?"
+    },
+    "f03_clave_de_union": {
+      "lectura": "Sí, y mucho: unir por código de catálogo encuentra 258 ofertas comunes y unir por oferta encuentra 767, 3.0 veces más. Con la clave de la Parte I, la mayoría de las ofertas repetidas entre capturas habría pasado como distinta.",
+      "pregunta": "¿Cambia el resultado de la integración según el identificador usado?"
+    },
+    "f03_variacion_precio": {
+      "lectura": "De 767 ofertas presentes en ambas capturas, 573 (75 %) mantuvieron exactamente el mismo precio. Entre las que cambiaron dominan las subidas: 105 subieron y 89 bajaron, con una variación mediana de +1.9 %. Un precio de referencia es estable en el corto plazo, pero conviene fecharlo.",
+      "pregunta": "¿Cambian los precios de una misma oferta en dos días?"
     }
   },
   "ingesta": {
@@ -121,6 +133,20 @@
     "columnas_crudo_ho": 17,
     "filas_crudo_cat": 5080,
     "filas_crudo_ho": 3680
+  },
+  "integracion": {
+    "bajaron": 89,
+    "columnas_retiradas": [
+      "busqueda"
+    ],
+    "comunes_por_catalogo": 258,
+    "comunes_por_oferta": 767,
+    "sin_cambio_pct": 74.70664928292047,
+    "solo_categorias_mismas_busquedas": 1120,
+    "solo_home_office": 1947,
+    "subieron": 105,
+    "titulo_identico_pct": 98.82659713168188,
+    "variacion_mediana_cambiaron": 1.855
   },
   "limpieza": {
     "ajenas": {
