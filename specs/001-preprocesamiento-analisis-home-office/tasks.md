@@ -146,10 +146,10 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 **Independent Test**: Revisar el repositorio contra el escenario 6 del quickstart.
 
-- [ ] T043 [P] [US6] Implementar `scripts/generar_diccionarios.py`: diccionario inicial del home office (17 columnas crudas) y diccionario final (todas las columnas de `homeoffice_final.csv`) sobre `indicaciones/Formato Diccionario de datos Parte II.docx`, con notas de limitaciones, en `docs/diccionarios/` como `.docx` y PDF; `assert` de que el diccionario final cubre el 100 % de las columnas (FR-027, FR-028, SC-010)
-- [ ] T044 [US6] Implementar `scripts/generar_informe.py`: documento maestro sobre `indicaciones/Formato Proyecto Final Parte II.docx`, once secciones en el orden de la plantilla, índice con páginas, figuras de `docs/parte_2/figuras/`, cifras de `data/final/metricas.json`, tabla de objetivos con estado, diagrama del pipeline y conclusiones por objetivo; salida `docs/parte_2/Informe_Parte_II_DS3021.docx` y `.pdf` (FR-030, FR-033)
-- [ ] T045 [US6] Implementar `scripts/generar_presentacion.py`: 12–16 diapositivas 16:9 en `docs/parte_2/Presentacion_Parte_II_DS3021.pptx` con las mismas cifras y figuras (FR-031)
-- [ ] T046 [US6] Reescribir `README.md`: problema, estructura, instalación, ejecución paso a paso, dataset inicial y final, entregables y su ubicación, equipo (FR-029)
+- [X] T043 [P] [US6] Implementar `scripts/generar_diccionarios.py`: diccionario inicial del home office (17 columnas crudas) y diccionario final (todas las columnas de `homeoffice_final.csv`) sobre `indicaciones/Formato Diccionario de datos Parte II.docx`, con notas de limitaciones, en `docs/diccionarios/` como `.docx` y PDF; `assert` de que el diccionario final cubre el 100 % de las columnas (FR-027, FR-028, SC-010)
+- [X] T044 [US6] Implementar `scripts/generar_informe.py`: documento maestro sobre `indicaciones/Formato Proyecto Final Parte II.docx`, once secciones en el orden de la plantilla, índice con páginas, figuras de `docs/parte_2/figuras/`, cifras de `data/final/metricas.json`, tabla de objetivos con estado, diagrama del pipeline y conclusiones por objetivo; salida `docs/parte_2/Informe_Parte_II_DS3021.docx` y `.pdf` (FR-030, FR-033)
+- [X] T045 [US6] Implementar `scripts/generar_presentacion.py`: 12–16 diapositivas 16:9 en `docs/parte_2/Presentacion_Parte_II_DS3021.pptx` con las mismas cifras y figuras (FR-031)
+- [X] T046 [US6] Reescribir `README.md`: problema, estructura, instalación, ejecución paso a paso, dataset inicial y final, entregables y su ubicación, equipo (FR-029)
 
 ---
 

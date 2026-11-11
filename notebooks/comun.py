@@ -122,7 +122,8 @@ def registrar(seccion, **valores):
     """Guarda cifras en data/final/metricas.json bajo una sección; el informe y la presentación las leen de ahí."""
     datos = json.loads(METRICAS.read_text(encoding='utf-8')) if METRICAS.exists() else {}
     datos.setdefault(seccion, {}).update(json.loads(json.dumps(valores, default=_a_json)))
-    METRICAS.write_text(json.dumps(datos, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+    METRICAS.write_text(json.dumps(datos, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8',
+                        newline='\n')
 
 
 def leer_metricas():

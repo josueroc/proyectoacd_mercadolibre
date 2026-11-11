@@ -118,7 +118,8 @@ def escribir_manifiesto():
         datos = pd.read_csv(ruta)
         manifiesto[ruta.name] = {'filas': len(datos), 'columnas': datos.shape[1],
                                  'sha256': hashlib.sha256(contenido).hexdigest()}
-    (FINAL / 'manifiesto.json').write_text(json.dumps(manifiesto, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+    (FINAL / 'manifiesto.json').write_text(json.dumps(manifiesto, indent=2, sort_keys=True) + '\n', encoding='utf-8',
+                                           newline='\n')
 
 
 def main(argumentos=None):
