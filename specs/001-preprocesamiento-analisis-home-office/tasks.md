@@ -129,12 +129,12 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 **Independent Test**: Ejecutar `notebooks/05_analisis_y_visualizacion.ipynb`; cada gráfico tiene título, ejes con unidades e interpretación, y cada insight su usuario, acción y cifra.
 
-- [ ] T037 [US4] Leer el almacén con SQL en `notebooks/05_analisis_y_visualizacion.ipynb` y presentar costos por componente, gama y perfil con sus rangos (FR-020)
-- [ ] T038 [US4] Analizar dispersión de precios por componente y gama, efecto real de las promociones (descuento calculado frente al anunciado), peso del financiamiento en cuotas, relación entre calificación, unidades vendidas y precio, y diferencias por marca y tipo de vendedor; cada variable derivada usada en al menos un análisis (FR-021, SC-006)
-- [ ] T039 [US4] Analizar anomalías y segmentaciones: atípicos conservados, variación de precio entre capturas y relación entre especificaciones y gama
-- [ ] T040 [US4] Guardar cada figura en `docs/parte_2/figuras/` con título, ejes con unidades, texto ≥ 9 pt y una interpretación escrita debajo en el notebook; inventario de figuras con su interpretación (FR-022, NFR-006, SC-009)
-- [ ] T041 [US4] Redactar al menos 5 insights, cada uno con usuario destinatario, acción recomendada y cifra calculada (FR-023, SC-008)
-- [ ] T042 [US4] Escribir `data/final/metricas.json` con toda cifra que citan el informe y la presentación, incluido el balance por etapa (SC-003)
+- [X] T037 [US4] Leer el almacén con SQL en `notebooks/05_analisis_y_visualizacion.ipynb` y presentar costos por componente, gama y perfil con sus rangos (FR-020)
+- [X] T038 [US4] Analizar dispersión de precios por componente y gama, efecto real de las promociones (descuento calculado frente al anunciado), peso del financiamiento en cuotas, relación entre calificación, unidades vendidas y precio, y diferencias por marca y tipo de vendedor; cada variable derivada usada en al menos un análisis (FR-021, SC-006)
+- [X] T039 [US4] Analizar anomalías y segmentaciones: atípicos conservados, variación de precio entre capturas y relación entre especificaciones y gama
+- [X] T040 [US4] Guardar cada figura en `docs/parte_2/figuras/` con título, ejes con unidades, texto ≥ 9 pt y una interpretación escrita debajo en el notebook; inventario de figuras con su interpretación (FR-022, NFR-006, SC-009)
+- [X] T041 [US4] Redactar al menos 5 insights, cada uno con usuario destinatario, acción recomendada y cifra calculada (FR-023, SC-008)
+- [X] T042 [US4] Escribir `data/final/metricas.json` con toda cifra que citan el informe y la presentación, incluido el balance por etapa (SC-003)
 
 **Checkpoint**: análisis completo; `python pipeline.py` ejecuta las seis etapas
 

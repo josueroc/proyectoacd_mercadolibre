@@ -57,7 +57,11 @@ ACENTO = '#e34948'       # resaltar un subconjunto (por ejemplo, atípicos) fren
 
 
 def aplicar_estilo():
-    """Estilo común. Con 8 pulgadas de ancho insertadas a 16 cm, 12 pt se leen como unos 9,5 pt (NFR-006)."""
+    """Estilo común. Con 8 pulgadas de ancho insertadas a 16 cm, 12 pt se leen como unos 9,5 pt (NFR-006).
+
+    También fija la semilla de numpy: algunos gráficos (stripplot) dispersan los puntos al azar.
+    """
+    np.random.seed(SEMILLA)
     plt.rcParams.update({
         'figure.figsize': (8, 4.5),
         'figure.dpi': 110,

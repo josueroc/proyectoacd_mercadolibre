@@ -1,4 +1,178 @@
 {
+  "analisis": {
+    "anomalias": {
+      "% sin cambio de precio en dos días": 74.7,
+      "atípicos de precio conservados": 35.0,
+      "excluidos por error comprobable": 1.0,
+      "ofertas en ambas capturas": 767.0,
+      "promociones con descuento inflado": 7.0
+    },
+    "composicion_laptop_pct": {
+      "alto": 67.47775222396608,
+      "económico": 76.83631943053311,
+      "medio": 72.636815920398
+    },
+    "cuota_mensual": {
+      "alto": {
+        "12 cuotas": 1027.0,
+        "6 cuotas": 2054.0
+      },
+      "económico": {
+        "12 cuotas": 304.0,
+        "6 cuotas": 607.0
+      },
+      "medio": {
+        "12 cuotas": 528.0,
+        "6 cuotas": 1055.0
+      }
+    },
+    "cuotas_pct": 97.89977892409726,
+    "gamer_diferencia": {
+      "audifonos": 0.23,
+      "laptop": 0.47,
+      "monitor": -0.24,
+      "mouse": 0.71,
+      "silla": -0.21,
+      "teclado": 0.11
+    },
+    "kits": {
+      "ahorro_pct": -3.2369443245576113,
+      "mediana": 119.6,
+      "n": 133,
+      "por_separado": 115.85
+    },
+    "laptop_por_marca": {
+      "acer": 7312.0,
+      "apple": 6924.0,
+      "asus": 5674.0,
+      "dell": 3850.0,
+      "hp": 3274.0,
+      "lenovo": 3633.0,
+      "msi": 5840.0,
+      "otra": 5199.0
+    },
+    "laptop_por_ram": {
+      "16.0": 4509.5,
+      "32.0": 7798.0,
+      "8.0": 2899.0
+    },
+    "perfiles": {
+      "alto": {
+        "mediano": 12322.58,
+        "q1": 10463.63,
+        "q3": 16238.76
+      },
+      "económico": {
+        "mediano": 3644.11,
+        "q1": 2812.3,
+        "q3": 4201.99
+      },
+      "medio": {
+        "mediano": 6331.5,
+        "q1": 5490.54,
+        "q3": 7373.38
+      }
+    },
+    "precios_por_gama": {
+      "audifonos": {
+        "alta": 545.58,
+        "económica": 69.0,
+        "media": 155.0
+      },
+      "laptop": {
+        "alta": 8315.0,
+        "económica": 2800.0,
+        "media": 4599.0
+      },
+      "monitor": {
+        "alta": 1679.0,
+        "económica": 407.88,
+        "media": 750.0
+      },
+      "mouse": {
+        "alta": 344.0,
+        "económica": 39.9,
+        "media": 98.5
+      },
+      "silla": {
+        "alta": 980.0,
+        "económica": 251.38,
+        "media": 500.0
+      },
+      "teclado": {
+        "alta": 459.0,
+        "económica": 75.95,
+        "media": 229.0
+      }
+    },
+    "promo_componentes_mas_caras": 4,
+    "promo_p": 0.0008432078172022539,
+    "promociones": {
+      "audifonos": {
+        "descuento_mediano": 32.01,
+        "pct_con_descuento": 54.99
+      },
+      "laptop": {
+        "descuento_mediano": 22.78,
+        "pct_con_descuento": 65.26
+      },
+      "monitor": {
+        "descuento_mediano": 30.02,
+        "pct_con_descuento": 62.11
+      },
+      "mouse": {
+        "descuento_mediano": 24.67,
+        "pct_con_descuento": 41.26
+      },
+      "silla": {
+        "descuento_mediano": 45.12,
+        "pct_con_descuento": 63.4
+      },
+      "teclado": {
+        "descuento_mediano": 29.29,
+        "pct_con_descuento": 46.76
+      }
+    },
+    "silla_envio_gratis_pct": 66.59574468085107,
+    "spearman_calificacion": {
+      "p": 7.119893676313728e-15,
+      "rho": 0.2448658762874599
+    },
+    "spearman_vendidos": {
+      "p": 0.013910800357561245,
+      "rho": -0.07775753960576377
+    },
+    "vendedor": {
+      "anuncio patrocinado": {
+        "diferencia": -0.4509,
+        "mediana no": -0.0419,
+        "mediana sí": -0.4928,
+        "p (Mann-Whitney)": 0.0,
+        "publicaciones": 91.0
+      },
+      "envío gratis": {
+        "diferencia": 0.2931,
+        "mediana no": -0.3339,
+        "mediana sí": -0.0408,
+        "p (Mann-Whitney)": 0.0004,
+        "publicaciones": 2503.0
+      },
+      "tienda de la marca": {
+        "diferencia": 0.1944,
+        "mediana no": -0.0784,
+        "mediana sí": 0.116,
+        "p (Mann-Whitney)": 0.0,
+        "publicaciones": 352.0
+      },
+      "vendedor visible": {
+        "diferencia": 0.2998,
+        "mediana no": -0.1896,
+        "mediana sí": 0.1102,
+        "p (Mann-Whitney)": 0.0,
+        "publicaciones": 1185.0
+      }
+    }
+  },
   "atipicos": {
     "coinciden": 4,
     "conservados_marcados": 35,
@@ -309,6 +483,38 @@
     "f04_validacion_gamas": {
       "lectura": "En parte, y cada componente de forma distinta. La RAM mediana de las laptops es 16, 16 y 32 GB en las gamas económica, media y alta: la memoria distingue a la gama alta. El monitor mediano mide 24, 27 y 27 pulgadas: el tamaño distingue a la gama económica. Las sillas ergonómicas pasan de 34 % a 57 %. En cambio, la proporción de periféricos inalámbricos apenas cambia (57–58 %): la conexión inalámbrica no es lo que encarece un teclado, un mouse o unos audífonos.",
       "pregunta": "¿Las gamas definidas por precio corresponden a equipos distintos?"
+    },
+    "f05_composicion_perfiles": {
+      "lectura": "La laptop concentra entre 67 % y 77 % del costo según el perfil. Monitor y silla suman entre 18 % y 22 %; teclado, mouse y audífonos juntos no llegan a 11 %. Elegir la gama de la laptop es la decisión que más mueve el presupuesto.",
+      "pregunta": "¿En qué componente se concentra el presupuesto?"
+    },
+    "f05_costo_perfiles": {
+      "lectura": "Un home office cuesta S/ 3 644 en gama económica, S/ 6 332 en gama media y S/ 12 323 en gama alta: el perfil alto cuesta 3.4 veces el económico. La cifra única de la Parte I (S/ 6 335) coincide con el perfil medio, pero oculta que el presupuesto real depende del nivel de equipamiento elegido.",
+      "pregunta": "¿Cuánto cuesta equipar un home office según el nivel de equipamiento?"
+    },
+    "f05_cuotas": {
+      "lectura": "El 97.9 % de las publicaciones ofrece cuotas, todas sin interés y sobre todo en 6 (80 %) o 12 cuotas. Un perfil medio cuesta S/ 528 al mes en 12 cuotas sin recargo: financiar no encarece el equipo, solo reparte el gasto.",
+      "pregunta": "¿Cuánto se paga al mes si se financia el home office?"
+    },
+    "f05_gamer": {
+      "lectura": "Depende del componente. \"Gamer\" encarece laptop, teclado, mouse y audífonos (el mouse gamer está 0.71 desviaciones por encima del resto), pero no monitor ni silla: ahí los productos gamer son incluso más baratos que el resto. Para un home office, un mouse o una laptop gamer agregan costo por prestaciones que el trabajo de oficina no necesita.",
+      "pregunta": "¿Cuesta más un equipo con la etiqueta \"gamer\"?"
+    },
+    "f05_laptops": {
+      "lectura": "La memoria marca escalones claros: la mediana pasa de S/ 2 899 con 8 GB a S/ 4 510 con 16 GB y S/ 7 798 con 32 GB. Entre marcas, la mediana va de S/ 3 274 (HP) a S/ 7 312 (Acer). Para trabajo de oficina, 16 GB es la configuración más ofrecida (220 laptops) y queda en la gama media.",
+      "pregunta": "¿Qué explica el precio de una laptop?"
+    },
+    "f05_precio_por_gama": {
+      "lectura": "Las gamas no se superponen por construcción, pero la distancia entre ellas varía mucho: la laptop de gama alta cuesta 3.0 veces la económica, y el mayor salto relativo está en mouse (8.6 veces). La mediana de cada gama es la referencia que se suma en los perfiles.",
+      "pregunta": "¿Cuánto se separan los precios entre gamas dentro de cada componente?"
+    },
+    "f05_promociones": {
+      "lectura": "No. Entre 41 % y 65 % de las publicaciones anuncian una promoción, con descuentos medianos de hasta 45 % (sillas). Pero en 4 de 6 componentes el precio final de las ofertas con descuento es mayor que el de las que no tienen promoción (Mann-Whitney, p = 0.0008). El porcentaje de descuento no indica un buen precio: hay que comparar el precio final.",
+      "pregunta": "¿Las publicaciones con descuento son más baratas?"
+    },
+    "f05_reputacion": {
+      "lectura": "Van en sentidos opuestos. La relación entre ventas y precio es débil en general (Spearman ρ = -0.08, p = 0.014), pero marcada en el extremo: las publicaciones con +1000 vendidos tienen un precio relativo mediano de -0.49, más baratas que su componente. En cambio, las mejor calificadas son más caras (ρ = 0.24, p < 0,001). Lo más vendido no es lo mejor valorado. Recordatorio: solo 36 % de las publicaciones muestra reseñas, y faltan más en los productos caros (notebook 02).",
+      "pregunta": "¿Cómo se relacionan popularidad, calificación y precio?"
     }
   },
   "ingesta": {
@@ -316,6 +522,58 @@
     "columnas_crudo_ho": 17,
     "filas_crudo_cat": 5080,
     "filas_crudo_ho": 3680
+  },
+  "insights": {
+    "lista": [
+      {
+        "accion": "Fijar la provisión o la compensación de la Ley 31572 por perfil y no con una cifra única, y declarar la fecha de los precios usados.",
+        "cifra": "perfil medio S/ 6 332; rango S/ 5 491 – S/ 7 373",
+        "hallazgo": "El valor de mercado de un home office completo depende del nivel de equipamiento: S/ 3 644 (económico), S/ 6 332 (medio) y S/ 12 323 (alto).",
+        "usuario": "Área de RR. HH. o empleador"
+      },
+      {
+        "accion": "Definir primero la gama de la laptop (16 GB de RAM basta para oficina) y no buscar ahorro en los periféricos.",
+        "cifra": "laptop de 16 GB: S/ 4 510 frente a S/ 7 798 con 32 GB",
+        "hallazgo": "La laptop concentra entre 67 % y 77 % del costo; los periféricos juntos, menos de 11 %.",
+        "usuario": "Trabajador o estudiante"
+      },
+      {
+        "accion": "Comparar el precio final entre publicaciones del mismo componente y gama, no el porcentaje de descuento.",
+        "cifra": "4 de 6 componentes con precio relativo mayor con promoción; p = 0.0008",
+        "hallazgo": "Un descuento anunciado no garantiza un buen precio: las ofertas con promoción no son más baratas que las demás de su componente.",
+        "usuario": "Trabajador o estudiante"
+      },
+      {
+        "accion": "Financiar en 12 cuotas sin interés para repartir el gasto sin pagar más.",
+        "cifra": "perfil medio: S/ 528 al mes",
+        "hallazgo": "El 98 % de las ofertas tiene cuotas sin interés.",
+        "usuario": "Trabajador o estudiante"
+      },
+      {
+        "accion": "En el perfil económico, elegir teclado y mouse por separado: por el mismo dinero se escoge cada uno.",
+        "cifra": "kit mediano S/ 119,60 frente a S/ 115,85 por separado",
+        "hallazgo": "Un kit de teclado y mouse no ahorra: cuesta 3 % más que comprar un teclado y un mouse económicos por separado.",
+        "usuario": "Trabajador o estudiante con presupuesto ajustado"
+      },
+      {
+        "accion": "Para trabajo de oficina, evitar mouse y laptops gamer: pagan prestaciones que no se usan.",
+        "cifra": "mouse gamer: +0.71 desviaciones sobre el resto",
+        "hallazgo": "La etiqueta \"gamer\" encarece laptop, teclado, mouse y audífonos.",
+        "usuario": "Trabajador o estudiante"
+      },
+      {
+        "accion": "No descartar los anuncios al comparar: suelen estar entre las opciones más baratas de su componente.",
+        "cifra": "p = 1.8e-05",
+        "hallazgo": "Los anuncios patrocinados no son más caros: su precio relativo mediano es -0.49 frente a -0.04 de los resultados orgánicos.",
+        "usuario": "Trabajador o estudiante"
+      },
+      {
+        "accion": "Sumar el costo de envío al comparar sillas.",
+        "cifra": "67 % de sillas con envío gratis",
+        "hallazgo": "La silla es el componente con menos envío gratuito (67 % frente a más de 90 % en los demás).",
+        "usuario": "Trabajador que compra una silla"
+      }
+    ]
   },
   "integracion": {
     "bajaron": 89,

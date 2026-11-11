@@ -8,7 +8,6 @@ falle. Contrato: specs/001-preprocesamiento-analisis-home-office/contracts/pipel
     python pipeline.py --hasta 05   # se detiene después de una etapa
 """
 import argparse
-import asyncio
 import hashlib
 import json
 import os
@@ -16,6 +15,7 @@ import re
 import sqlite3
 import sys
 import time
+import warnings
 from pathlib import Path
 
 import nbformat
@@ -26,8 +26,7 @@ from nbconvert.preprocessors import CellExecutionError, ExecutePreprocessor
 os.environ.setdefault('LOKY_MAX_CPU_COUNT', '1')
 os.environ.setdefault('PYDEVD_DISABLE_FILE_VALIDATION', '1')
 os.environ.setdefault('PYTHONWARNINGS', 'ignore')
-if sys.platform == 'win32':
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+warnings.filterwarnings('ignore', message='Proactor event loop')
 
 RAIZ = Path(__file__).resolve().parent
 NOTEBOOKS = RAIZ / 'notebooks'
@@ -92,7 +91,12 @@ def cargar_almacen():
         for ruta in sorted(EVIDENCIA.glob('*.csv')):
             evidencia = pd.read_csv(ruta, dtype=str)
             evidencia['archivo'] = ruta.name
-            partes.append(evidencia.reindex(columns=['archivo', 'etapa', 'motivo', 'id_oferta', 'titulo', 'precio']))
+            # Cada archivo detalla el motivo con su propia columna; se unifican en `detalle`.
+            columnas_detalle = [c for c in ('tipo', 'detalle', 'decision', 'regla') if c in evidencia]
+            evidencia['detalle'] = (evidencia[columnas_detalle].bfill(axis=1).iloc[:, 0] if columnas_detalle
+                                    else pd.NA)
+            partes.append(evidencia.reindex(columns=['archivo', 'etapa', 'motivo', 'detalle', 'id_oferta', 'titulo',
+                                                     'precio']))
         excluidos = pd.concat(partes, ignore_index=True)
         excluidos.to_sql('excluidos', conexion, index=False)
         conexion.execute('CREATE INDEX ix_excluidos ON excluidos (id_oferta, etapa)')
