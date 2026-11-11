@@ -4,7 +4,12 @@ Contiene rutas, estilo de figuras y el registro de evidencia, balance y métrica
 datos: cada decisión de preprocesamiento vive, explicada, en su notebook.
 """
 import json
+import os
 from pathlib import Path
+
+# scikit-learn intenta contar núcleos físicos con una llamada que falla en algunos Windows; un valor fijo evita
+# el aviso y no cambia los resultados.
+os.environ.setdefault('LOKY_MAX_CPU_COUNT', '1')
 
 import matplotlib.pyplot as plt
 import numpy as np

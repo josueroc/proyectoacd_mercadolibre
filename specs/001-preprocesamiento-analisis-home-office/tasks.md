@@ -52,24 +52,24 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 ### Notebook 01 — ingesta y limpieza
 
-- [ ] T007 [US1] Ingestión con validación de esquema de ambos crudos (17 y 13 columnas esperadas, nombres codificables, tipos de texto) en `notebooks/01_ingesta_y_limpieza.ipynb` (FR-001, FR-002)
-- [ ] T008 [US1] Normalizar espacios y convertir textos a tipos: precio y precio anterior en formato peruano, "NN% OFF", "N cuotas de S/ X", "4.8 | +100 vendidos" → `calificacion` y `vendidos_min`, y envío → `envio` ∈ {gratis mañana, gratis, mañana con costo, no informado}; registrar cada texto no interpretable en `data/evidencia/01_inconsistencias.csv` (FR-003)
-- [ ] T009 [US1] Calcular `id_oferta` con la regla R1 (`wid` → ruta directa sin `/p/` → código de catálogo marcado) y `id_catalogo` para ambas capturas en `notebooks/01_ingesta_y_limpieza.ipynb`
-- [ ] T010 [US1] Detectar inconsistencias entre campos: precio anterior ≤ precio, descuento anunciado frente al calculado, `numero_cuotas × monto_cuota` frente al precio; registrarlas sin borrar en `data/evidencia/01_inconsistencias.csv` (FR-004)
-- [ ] T011 [US1] Deduplicar por `id_oferta` conservando la observación más reciente y, en empate, la última fila; guardar los retirados en `data/evidencia/01_duplicados.csv` y comparar con la deduplicación por catálogo de la Parte I (FR-005, NFR-004)
-- [ ] T012 [US1] Detectar publicaciones ajenas al componente con la regla R4 (el título no nombra el componente o empieza con un sustantivo de accesorio), revisar las candidatas y guardarlas en `data/evidencia/01_ajenas_al_componente.csv` (FR-032)
-- [ ] T013 [US1] Exportar `data/intermedio/01_homeoffice_limpio.csv` y `data/intermedio/01_categorias_limpio.csv` (este último con `id_oferta` de la Parte I) y verificar con `assert`: "`id_oferta` único y sin nulos", "`precio > 0`" y balance entrada = salida + duplicados + ajenas
+- [X] T007 [US1] Ingestión con validación de esquema de ambos crudos (17 y 13 columnas esperadas, nombres codificables, tipos de texto) en `notebooks/01_ingesta_y_limpieza.ipynb` (FR-001, FR-002)
+- [X] T008 [US1] Normalizar espacios y convertir textos a tipos: precio y precio anterior en formato peruano, "NN% OFF", "N cuotas de S/ X", "4.8 | +100 vendidos" → `calificacion` y `vendidos_min`, y envío → `envio` ∈ {gratis mañana, gratis, mañana con costo, no informado}; registrar cada texto no interpretable en `data/evidencia/01_inconsistencias.csv` (FR-003)
+- [X] T009 [US1] Calcular `id_oferta` con la regla R1 (`wid` → ruta directa sin `/p/` → código de catálogo marcado) y `id_catalogo` para ambas capturas en `notebooks/01_ingesta_y_limpieza.ipynb`
+- [X] T010 [US1] Detectar inconsistencias entre campos: precio anterior ≤ precio, descuento anunciado frente al calculado, `numero_cuotas × monto_cuota` frente al precio; registrarlas sin borrar en `data/evidencia/01_inconsistencias.csv` (FR-004)
+- [X] T011 [US1] Deduplicar por `id_oferta` conservando la observación más reciente y, en empate, la última fila; guardar los retirados en `data/evidencia/01_duplicados.csv` y comparar con la deduplicación por catálogo de la Parte I (FR-005, NFR-004)
+- [X] T012 [US1] Detectar publicaciones ajenas al componente con la regla R4 (el título no nombra el componente o empieza con un sustantivo de accesorio), revisar las candidatas y guardarlas en `data/evidencia/01_ajenas_al_componente.csv` (FR-032)
+- [X] T013 [US1] Exportar `data/intermedio/01_homeoffice_limpio.csv` y `data/intermedio/01_categorias_limpio.csv` (este último con `id_oferta` de la Parte I) y verificar con `assert`: "`id_oferta` único y sin nulos", "`precio > 0`" y balance entrada = salida + duplicados + ajenas
 
 ### Notebook 02 — faltantes y atípicos
 
-- [ ] T014 [US1] Cuantificar faltantes por columna y por componente (tabla y mapa de calor) en `notebooks/02_faltantes_y_atipicos.ipynb` (FR-006)
-- [ ] T015 [US1] Diagnosticar el tipo de cada faltante con `crosstab` y `chi2_contingency` contra componente y página, y con la mediana de precio con y sin faltante; concluir MCAR, MAR o MNAR por columna, con la justificación escrita junto a la celda (FR-007, SC-002)
-- [ ] T016 [US1] Aplicar la estrategia por tipo (R2): `tiene_descuento` y `descuento_pct = 0` estructurales; `ofrece_cuotas`; indicadores `tiene_resenas` y `vendedor_visible` sin imputar; `envio = no informado`; eliminar `etiqueta_texto`; mostrar como contraste el efecto de imputar la calificación con la mediana del componente (FR-008, FR-009)
-- [ ] T017 [US1] Detectar atípicos univariados sobre `log10(precio)` por componente con IQR (factor 1,5) y |z| > 3, con boxplot e histograma (FR-010)
-- [ ] T018 [US1] Detectar atípicos bivariados (precio frente a precio anterior; precio frente a `numero_cuotas × monto_cuota`) con diagramas de dispersión (FR-011)
-- [ ] T019 [US1] Detectar atípicos multivariados con K-Means por componente sobre variables estandarizadas (`random_state=42`, `n_init` explícito), marcando las distancias al centroide sobre el percentil 99 y los grupos de menos de 1 %; contrastar con Mahalanobis (FR-011)
-- [ ] T020 [US1] Decidir cada atípico con la regla de FR-012 (error comprobable → excluir; extremo plausible → conservar con `atipico_precio = True`); guardar `data/evidencia/02_atipicos.csv` y `data/evidencia/02_excluidos_por_error.csv` (SC-002, NFR-004)
-- [ ] T021 [US1] Exportar `data/intermedio/02_homeoffice_tratado.csv` y verificar con `assert`: "`tiene_descuento ⇔ precio_anterior` no nulo", "`ofrece_cuotas ⇔ numero_cuotas` no nulo", "`1 ≤ calificacion ≤ 5`", "`0 ≤ descuento_pct < 100`" y balance
+- [X] T014 [US1] Cuantificar faltantes por columna y por componente (tabla y mapa de calor) en `notebooks/02_faltantes_y_atipicos.ipynb` (FR-006)
+- [X] T015 [US1] Diagnosticar el tipo de cada faltante con `crosstab` y `chi2_contingency` contra componente y página, y con la mediana de precio con y sin faltante; concluir MCAR, MAR o MNAR por columna, con la justificación escrita junto a la celda (FR-007, SC-002)
+- [X] T016 [US1] Aplicar la estrategia por tipo (R2): `tiene_descuento` y `descuento_pct = 0` estructurales; `ofrece_cuotas`; indicadores `tiene_resenas` y `vendedor_visible` sin imputar; `envio = no informado`; eliminar `etiqueta_texto`; mostrar como contraste el efecto de imputar la calificación con la mediana del componente (FR-008, FR-009)
+- [X] T017 [US1] Detectar atípicos univariados sobre `log10(precio)` por componente con IQR (factor 1,5) y |z| > 3, con boxplot e histograma (FR-010)
+- [X] T018 [US1] Detectar atípicos bivariados (precio frente a precio anterior; precio frente a `numero_cuotas × monto_cuota`) con diagramas de dispersión (FR-011)
+- [X] T019 [US1] Detectar atípicos multivariados con K-Means por componente sobre variables estandarizadas (`random_state=42`, `n_init` explícito), marcando las distancias al centroide sobre el percentil 99 y los grupos de menos de 1 %; contrastar con Mahalanobis (FR-011)
+- [X] T020 [US1] Decidir cada atípico con la regla de FR-012 (error comprobable → excluir; extremo plausible → conservar con `atipico_precio = True`); guardar `data/evidencia/02_atipicos.csv` y `data/evidencia/02_excluidos_por_error.csv` (SC-002, NFR-004)
+- [X] T021 [US1] Exportar `data/intermedio/02_homeoffice_tratado.csv` y verificar con `assert`: "`tiene_descuento ⇔ precio_anterior` no nulo", "`ofrece_cuotas ⇔ numero_cuotas` no nulo", "`1 ≤ calificacion ≤ 5`", "`0 ≤ descuento_pct < 100`" y balance
 
 **Checkpoint**: US1 completa — dataset tratado y justificado (MVP)
 

@@ -1,0 +1,152 @@
+{
+  "atipicos": {
+    "coinciden": 4,
+    "conservados_marcados": 35,
+    "excluidos_por_error": 1,
+    "kmeans": 29,
+    "mahalanobis": 4,
+    "p99_laptop": 15879.0,
+    "por_componente": {
+      "audifonos": 5,
+      "laptop": 1,
+      "monitor": 4,
+      "mouse": 0,
+      "silla": 16,
+      "teclado": 10
+    },
+    "univariados": 36
+  },
+  "balance": {
+    "01_categorias": {
+      "duplicados": 605,
+      "entrada": 5080,
+      "invalidas": 56,
+      "precios_excluidos_parte1": 7,
+      "salida": 4412
+    },
+    "01_homeoffice": {
+      "ajenas": 178,
+      "duplicados": 787,
+      "entrada": 3680,
+      "salida": 2715
+    },
+    "02_homeoffice": {
+      "entrada": 2715,
+      "errores": 1,
+      "salida": 2714
+    }
+  },
+  "faltantes": {
+    "contraste_calificacion": {
+      "moda_pct_imputada": 48.39779005524862,
+      "std_imputada": 0.169,
+      "std_observada": 0.178
+    },
+    "diagnostico": {
+      "calificacion": {
+        "mediana_con": 222.0,
+        "mediana_sin": 596.605,
+        "p_anuncio": 0.0012433667916955694,
+        "p_componente": 1.2619230471065407e-107,
+        "p_pagina": 5.418266660267975e-64,
+        "pct": 63.79
+      },
+      "envio": {
+        "mediana_con": 408.925,
+        "mediana_sin": 559.0,
+        "p_anuncio": 1.0,
+        "p_componente": 1.7498350367285536e-148,
+        "p_pagina": 6.053961230409673e-35,
+        "pct": 6.37
+      },
+      "numero_cuotas": {
+        "mediana_con": 429.53499999999997,
+        "mediana_sin": 23.9,
+        "p_anuncio": 9.532176678893854e-07,
+        "p_componente": 5.020466199393942e-14,
+        "p_pagina": 0.0002376268519227385,
+        "pct": 2.1
+      },
+      "precio_anterior": {
+        "mediana_con": 499.0,
+        "mediana_sin": 309.0,
+        "p_anuncio": 0.7016546183744324,
+        "p_componente": 2.5637181827251055e-17,
+        "p_pagina": 2.2946185100032043e-13,
+        "pct": 43.65
+      },
+      "vendedor": {
+        "mediana_con": 514.79,
+        "mediana_sin": 344.4,
+        "p_anuncio": 0.5497784051294099,
+        "p_componente": 9.24917565548085e-59,
+        "p_pagina": 0.026098876809134967,
+        "pct": 56.35
+      },
+      "vendidos_min": {
+        "mediana_con": 225.0,
+        "mediana_sin": 599.0,
+        "p_anuncio": 0.0009531215788600337,
+        "p_componente": 1.049648059930726e-103,
+        "p_pagina": 4.7616897007636e-64,
+        "pct": 63.13
+      }
+    },
+    "promociones_anuladas": 8
+  },
+  "figuras": {
+    "f02_atipicos_multivariados": {
+      "lectura": "K-Means marca 29 publicaciones y Mahalanobis coincide en 4. En 18 el rasgo que más las aleja de su grupo es el precio y en 11, la posición: son, sobre todo, productos de gama alta que el sitio muestra al final de los resultados (posición mediana 594 frente a 352), y 4 ofertas baratas con descuentos de 40 % o más en los primeros 100 puestos. Son combinaciones poco frecuentes, no valores imposibles: se marcan y se conservan.",
+      "pregunta": "¿Hay publicaciones anómalas por la combinación de precio, descuento y posición?"
+    },
+    "f02_atipicos_univariados": {
+      "lectura": "Se detectan 36 atípicos univariados; 16 son sillas de oficina de gama alta (marcas como Steelcase, de hasta S/ 45 499). Los demás son audífonos y monitores de gama alta, minitecladas muy baratas y una sola laptop. La revisión de títulos muestra que casi todos son productos reales: la escala logarítmica y las medianas los absorben sin necesidad de eliminarlos.",
+      "pregunta": "¿Qué precios se alejan de lo habitual en cada componente?"
+    },
+    "f02_bivariado_promocion": {
+      "lectura": "Casi todas las promociones están sobre la diagonal, como deben. 8 publicaciones anuncian un \"precio anterior\" igual o menor que el actual: no son descuentos y se anularon. Ninguna supera un descuento de 74 %, así que no hay descuentos imposibles.",
+      "pregunta": "¿Son coherentes los precios anteriores que anuncian las promociones?"
+    },
+    "f02_faltantes_por_componente": {
+      "lectura": "No. El faltante de reseñas va de 28 % a 86 % según el componente y el de vendedor de 24 % a 71 %; el máximo es calificación en silla (86 %). Un faltante que depende del componente no es aleatorio, por eso no se pueden borrar esas filas sin sesgar la muestra.",
+      "pregunta": "¿Los faltantes se reparten igual entre componentes?"
+    },
+    "f02_precio_segun_faltante": {
+      "lectura": "Sí. Las publicaciones sin reseñas tienen una mediana de S/ 597 frente a S/ 222 con reseñas: los productos caros se venden menos y acumulan menos opiniones. Imputar la calificación con un promedio asignaría a productos caros la reputación de los baratos.",
+      "pregunta": "¿El faltante se relaciona con el precio de la publicación?"
+    }
+  },
+  "ingesta": {
+    "columnas_crudo_cat": 13,
+    "columnas_crudo_ho": 17,
+    "filas_crudo_cat": 5080,
+    "filas_crudo_ho": 3680
+  },
+  "limpieza": {
+    "ajenas": {
+      "accesorio": 33,
+      "combo de varios componentes": 139,
+      "otro producto": 6
+    },
+    "anuncios_patrocinados_crudo": 800,
+    "duplicados": 787,
+    "inconsistencias": {
+      "descuento anunciado distinto del calculado": 34,
+      "precio anterior no mayor que el precio": 9
+    },
+    "oferta_por_respaldo_catalogo": 20,
+    "ofertas_con_varios_codigos": 43,
+    "ofertas_por_componente": {
+      "audifonos": 471,
+      "laptop": 476,
+      "monitor": 483,
+      "mouse": 475,
+      "silla": 470,
+      "teclado": 340
+    },
+    "ofertas_unicas": 2715,
+    "reasignadas": 11,
+    "textos_no_interpretables": 0,
+    "unicos_por_catalogo_parte1": 2936
+  }
+}
