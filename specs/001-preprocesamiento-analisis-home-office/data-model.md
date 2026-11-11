@@ -37,14 +37,15 @@ Una fila por oferta de componente de home office. Clave: `id_oferta`.
 | `marca` | categórico | diccionario de marcas por componente sobre el título; `otra` si no se reconoce | No |
 | `precio` | decimal, S/ | texto peruano → número; > 0 | No |
 | `log_precio` | decimal | `log10(precio)` | No |
+| `precio_relativo` | decimal, desviaciones estándar | Z-score de `log_precio` dentro del componente | No |
 | `precio_anterior` | decimal, S/ | texto → número; > `precio` | Sí: sin promoción (estructural) |
 | `tiene_descuento` | booleano | precio anterior presente y mayor que el precio | No |
 | `descuento_pct` | decimal, % | `(precio_anterior − precio) / precio_anterior × 100`; 0 sin promoción | No |
 | `descuento_anunciado_pct` | entero, % | texto "NN% OFF" | Sí: sin promoción |
+| `descuento_inflado` | booleano | descuento anunciado > calculado en más de 1,5 puntos | No |
 | `ofrece_cuotas` | booleano | texto de cuotas presente | No |
 | `numero_cuotas` | entero | texto de cuotas | Sí: no ofrece cuotas (estructural) |
 | `monto_cuota` | decimal, S/ | texto de cuotas | Sí: no ofrece cuotas (estructural) |
-| `sobrecosto_cuotas_pct` | decimal, % | `(numero_cuotas × monto_cuota − precio) / precio × 100` | Sí: no ofrece cuotas |
 | `tiene_resenas` | booleano | texto de reseñas presente | No |
 | `calificacion` | decimal 1–5 | texto de reseñas | Sí: MAR, sin imputar |
 | `vendidos_min` | entero | "+N vendidos" → N (cota inferior) | Sí: MAR, sin imputar |
@@ -53,6 +54,9 @@ Una fila por oferta de componente de home office. Clave: `id_oferta`.
 | `entrega_manana` | booleano | `envio` contiene mañana | No |
 | `vendedor_visible` | booleano | texto de vendedor presente | No |
 | `vendedor` | categórico | nombre de tienda; `no informado` si falta | No |
+| `tienda_de_marca` | booleano | el nombre de la tienda contiene la marca | No |
+| `es_publicidad` | booleano | URL de anuncio patrocinado (redirección mclics) | No |
+| `es_gamer` | booleano | el título contiene "gamer" o "gaming" | No |
 | `ram_gb` | entero | título (solo laptop) | Sí: no aplica a otros componentes |
 | `almacenamiento_gb` | entero | título (solo laptop) | Sí: no aplica |
 | `pulgadas` | decimal | título (solo monitor) | Sí: no aplica |
@@ -70,6 +74,9 @@ Una fila por oferta de componente de home office. Clave: `id_oferta`.
 Los nulos "no aplica" o estructurales son la justificación que SC-005 exige para columnas con más de 10 % de
 faltantes; el diccionario final los declara así.
 
+**Desviación respecto del diseño inicial**: `sobrecosto_cuotas_pct` se descartó porque todas las cuotas
+observadas son sin interés (`numero_cuotas × monto_cuota ≈ precio`), así que la variable sería constante.
+
 **Invariantes** (verificados con `assert` en cada etapa):
 
 - `id_oferta` único y sin nulos; `precio > 0`; `0 ≤ descuento_pct < 100`; `1 ≤ calificacion ≤ 5`.
@@ -83,7 +90,9 @@ faltantes; el diccionario final los declara así.
 | --- | --- | --- |
 | `01_duplicados.csv` | 01 | ofertas repetidas retiradas, con la observación conservada |
 | `01_ajenas_al_componente.csv` | 01 | publicaciones que no son el componente buscado, con la regla que las detectó |
+| `01_reasignadas.csv` | 01 | laptops aparecidas en búsquedas de periféricos, reasignadas a `laptop` (se conservan) |
 | `01_inconsistencias.csv` | 01 | textos no interpretables o campos relacionados incoherentes (se conservan; solo se registran) |
+| `02_correcciones.csv` | 02 | promociones con precio anterior ≤ precio, anuladas (se conservan sin promoción) |
 | `02_atipicos.csv` | 02 | atípicos detectados, criterio y decisión (conservar / excluir) |
 | `02_excluidos_por_error.csv` | 02 | atípicos excluidos por error comprobable, con su motivo |
 

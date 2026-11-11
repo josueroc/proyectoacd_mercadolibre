@@ -110,14 +110,14 @@ notebooks/
 scripts/
 ├── generar_diccionarios.py                  # diccionario inicial (home office) y final, .docx + PDF
 ├── generar_informe.py                       # documento maestro sobre la plantilla oficial, .docx + PDF
-└── generar_presentacion.py                  # presentación .pptx
+└── generar_presentacion.py                  # presentación .pptx + PDF
 
 docs/                                        # antes documentos/
 ├── diccionarios/                            # inicial (categorías, Parte I; home office) y final
 ├── parte_2/
-│   ├── figuras/                             # PNG que genera el notebook 05
-│   ├── Informe_Parte_II_DS3021.docx / .pdf
-│   └── Presentacion_Parte_II_DS3021.pptx
+│   ├── figuras/                             # PNG de los notebooks 02–05 y diagrama del pipeline (f00)
+│   ├── informe/Informe_Parte_II_DS3021.docx / .pdf
+│   └── presentacion/Presentacion_Parte_II_DS3021.pptx / .pdf
 └── informe_home_office.pdf, latex/, ppt/, …  # Parte I, sin cambios
 ```
 

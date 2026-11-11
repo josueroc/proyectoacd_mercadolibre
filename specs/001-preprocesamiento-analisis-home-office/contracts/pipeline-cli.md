@@ -19,7 +19,7 @@ python pipeline.py --hasta 04 # se detiene después de una etapa
 | 03 | Transformación | `notebooks/03_integracion_y_reduccion.ipynb` | `02_homeoffice_tratado.csv`, `01_categorias_limpio.csv` | `03_homeoffice_integrado.csv`, `data/final/integracion_ofertas_comunes.csv` |
 | 04 | Transformación | `notebooks/04_transformacion_e_ingenieria_de_caracteristicas.ipynb` | `03_homeoffice_integrado.csv` | `data/final/homeoffice_final.csv`, `precios_por_gama.csv`, `perfiles_home_office.csv` |
 | 05 | Almacenamiento | función de carga en `pipeline.py` | CSV de `data/final/` y `data/evidencia/` | `data/final/home_office.sqlite`, `data/final/manifiesto.json` |
-| 06 | Serving / análisis | `notebooks/05_analisis_y_visualizacion.ipynb` | `home_office.sqlite` | `data/final/metricas.json`, `docs/parte_2/figuras/*.png` |
+| 06 | Serving / análisis | `notebooks/05_analisis_y_visualizacion.ipynb` | `home_office.sqlite` | `data/final/metricas.json`, `docs/parte_2/figuras/f05_*.png` (las etapas 02–04 dejan `f02`–`f04`) |
 
 Los notebooks se ejecutan en su lugar: quedan guardados con sus salidas, que son la evidencia que se revisa.
 

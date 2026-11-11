@@ -37,7 +37,7 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 **Purpose**: Utilidades compartidas por los cinco notebooks
 
-- [X] T005 Crear `notebooks/comun.py` con: rutas relativas a la raíz (`RAIZ`, `CRUDOS`, `HO_CRUDO`, `INTERMEDIO`, `EVIDENCIA`, `FINAL`, `FIGURAS`), `SEMILLA = 42`, estilo de figuras con texto ≥ 9 pt (NFR-006), `guardar_evidencia(df, archivo, etapa, motivo)` que añade las columnas `id_oferta`, `etapa`, `motivo`, y `verificar_balance(entrada, salida, *excluidos)` con `assert` (FR-026, NFR-004)
+- [X] T005 Crear `notebooks/comun.py` con: rutas relativas a la raíz (`RAIZ`, `CRUDO_CAT`, `CRUDO_HO`, `INTERMEDIO`, `EVIDENCIA`, `FINAL`, `FIGURAS`), `SEMILLA = 42`, estilo de figuras con texto ≥ 9 pt (NFR-006), `guardar_evidencia(df, archivo, etapa, motivo)` que añade las columnas `id_oferta`, `etapa`, `motivo`, y `registrar_balance(etapa, entrada, salida, **excluidos)` con `assert` (FR-026, NFR-004)
 - [X] T006 Verificar que en `notebooks/comun.py` ninguna ruta apunte a `data/crudos/` ni a `homeoffice_ml_crudo.csv` en modo escritura (constitución IV)
 
 **Checkpoint**: estructura y utilidades listas; las historias pueden comenzar
@@ -98,7 +98,7 @@ US5, por eso la fase de US5 va antes que la de US4.
 **Independent Test**: Ejecutar `notebooks/04_transformacion_e_ingenieria_de_caracteristicas.ipynb`; cada variable derivada debe tener regla, cobertura y aporte documentados, y cada publicación exactamente una gama.
 
 - [X] T027 [US3] Transformaciones con justificación: `log_precio = log10(precio)`, codificación binaria (`get_dummies`) de `componente` y `envio`, y escalamiento para comparar variables (FR-016) en `notebooks/04_transformacion_e_ingenieria_de_caracteristicas.ipynb`
-- [X] T028 [US3] Construir `marca` (diccionario de marcas por componente; `otra` si no se reconoce) y `sobrecosto_cuotas_pct` (FR-017)
+- [X] T028 [US3] Construir `marca` (diccionario de marcas por componente; `otra` si no se reconoce) (FR-017); `sobrecosto_cuotas_pct` descartada: todas las cuotas son sin interés
 - [X] T029 [US3] Extraer especificaciones del título: `ram_gb` y `almacenamiento_gb` (laptop), `pulgadas` (monitor), `inalambrico` (teclado, mouse, audífonos), `ergonomica` (silla); nulo "no aplica" en los demás componentes (FR-017)
 - [X] T030 [US3] Tabla de variables derivadas con regla, cobertura y aporte esperado al análisis; `assert` de al menos 10 variables derivadas (FR-019, SC-006)
 - [X] T031 [US3] Discretizar el precio en terciles por componente con `qcut` → `gama` ∈ {económica, media, alta}; publicar los límites; contrastar con K-Means de una dimensión; validar con una variable distinta del precio (FR-018)
@@ -147,16 +147,18 @@ US5, por eso la fase de US5 va antes que la de US4.
 **Independent Test**: Revisar el repositorio contra el escenario 6 del quickstart.
 
 - [X] T043 [P] [US6] Implementar `scripts/generar_diccionarios.py`: diccionario inicial del home office (17 columnas crudas) y diccionario final (todas las columnas de `homeoffice_final.csv`) sobre `indicaciones/Formato Diccionario de datos Parte II.docx`, con notas de limitaciones, en `docs/diccionarios/` como `.docx` y PDF; `assert` de que el diccionario final cubre el 100 % de las columnas (FR-027, FR-028, SC-010)
-- [X] T044 [US6] Implementar `scripts/generar_informe.py`: documento maestro sobre `indicaciones/Formato Proyecto Final Parte II.docx`, once secciones en el orden de la plantilla, índice con páginas, figuras de `docs/parte_2/figuras/`, cifras de `data/final/metricas.json`, tabla de objetivos con estado, diagrama del pipeline y conclusiones por objetivo; salida `docs/parte_2/Informe_Parte_II_DS3021.docx` y `.pdf` (FR-030, FR-033)
-- [X] T045 [US6] Implementar `scripts/generar_presentacion.py`: 12–16 diapositivas 16:9 en `docs/parte_2/Presentacion_Parte_II_DS3021.pptx` con las mismas cifras y figuras (FR-031)
+- [X] T044 [US6] Implementar `scripts/generar_informe.py`: documento maestro sobre `indicaciones/Formato Proyecto Final Parte II.docx`, once secciones en el orden de la plantilla, índice con páginas, figuras de `docs/parte_2/figuras/`, cifras de `data/final/metricas.json`, tabla de objetivos con estado, diagrama del pipeline y conclusiones por objetivo; salida `docs/parte_2/informe/Informe_Parte_II_DS3021.docx` y `.pdf` (FR-030, FR-033)
+- [X] T045 [US6] Implementar `scripts/generar_presentacion.py`: 12–16 diapositivas 16:9 en `docs/parte_2/presentacion/Presentacion_Parte_II_DS3021.pptx` (y PDF) con las mismas cifras y figuras (FR-031)
 - [X] T046 [US6] Reescribir `README.md`: problema, estructura, instalación, ejecución paso a paso, dataset inicial y final, entregables y su ubicación, equipo (FR-029)
 
 ---
 
 ## Phase 9: Polish & Cross-Cutting Concerns
 
-- [ ] T047 Ejecutar todos los escenarios de `quickstart.md` desde una copia limpia, medir la duración del pipeline completo (< 10 min) y comprobar cifras idénticas a las versionadas; registrar el resultado (NFR-001, NFR-003, SC-001)
-- [ ] T048 Verificar que cada cifra del informe y de la presentación coincide con `data/final/metricas.json`, y que cada técnica usada en los notebooks cita su sesión del curso (U3–U5) o su justificación de excepción (NFR-005)
+- [X] T047 Ejecutar todos los escenarios de `quickstart.md` desde una copia limpia, medir la duración del pipeline completo (< 10 min) y comprobar cifras idénticas a las versionadas; registrar el resultado (NFR-001, NFR-003, SC-001)
+  - Resultado: copia limpia, pipeline en 46–50 s, salida 0; CSV finales idénticos a los versionados (manifiesto SHA-256); dos ejecuciones seguidas dejan los cinco notebooks byte a byte iguales; consulta SQL de ejemplo correcta; el escenario de invariante roto se detiene en la etapa 03 con `AssertionError: … id_oferta repetido`, salida 1.
+- [X] T048 Verificar que cada cifra del informe y de la presentación coincide con `data/final/metricas.json`, y que cada técnica usada en los notebooks cita su sesión del curso (U3–U5) o su justificación de excepción (NFR-005)
+  - Resultado: las cifras del informe y la presentación se leen de `metricas.json`; las escritas a mano (S/ 29 000, V de Cramér 0,995, p < 0,001, cobertura de marca > 79 % salvo sillas, 5 tablas) coinciden con los datos. Cada notebook cita sus sesiones (U3_L2–U3_L8, U3_T2–U3_T5, U4_L1, U4_T1, U5_T1); Mann-Whitney, Spearman y Mahalanobis llevan su justificación.
 - [ ] T049 Commits por etapa con Conventional Commits (NFR-007), push a `feature/parte-2-preprocesamiento` y Pull Request hacia `main`
 
 ---
