@@ -218,7 +218,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Diagnóstico regenerable y redundante con duplicados_retirados.csv (1 MB)
-datos/calidad/duplicados_detectados.csv
+data/calidad/duplicados_detectados.csv
 
 # Archivos temporales de Word
 ~$*
