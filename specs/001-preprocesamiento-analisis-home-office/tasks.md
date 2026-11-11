@@ -97,13 +97,13 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 **Independent Test**: Ejecutar `notebooks/04_transformacion_e_ingenieria_de_caracteristicas.ipynb`; cada variable derivada debe tener regla, cobertura y aporte documentados, y cada publicación exactamente una gama.
 
-- [ ] T027 [US3] Transformaciones con justificación: `log_precio = log10(precio)`, codificación binaria (`get_dummies`) de `componente` y `envio`, y escalamiento para comparar variables (FR-016) en `notebooks/04_transformacion_e_ingenieria_de_caracteristicas.ipynb`
-- [ ] T028 [US3] Construir `marca` (diccionario de marcas por componente; `otra` si no se reconoce) y `sobrecosto_cuotas_pct` (FR-017)
-- [ ] T029 [US3] Extraer especificaciones del título: `ram_gb` y `almacenamiento_gb` (laptop), `pulgadas` (monitor), `inalambrico` (teclado, mouse, audífonos), `ergonomica` (silla); nulo "no aplica" en los demás componentes (FR-017)
-- [ ] T030 [US3] Tabla de variables derivadas con regla, cobertura y aporte esperado al análisis; `assert` de al menos 10 variables derivadas (FR-019, SC-006)
-- [ ] T031 [US3] Discretizar el precio en terciles por componente con `qcut` → `gama` ∈ {económica, media, alta}; publicar los límites; contrastar con K-Means de una dimensión; validar con una variable distinta del precio (FR-018)
-- [ ] T032 [US3] Calcular `data/final/precios_por_gama.csv` (n, mínimo, Q1, mediana, Q3, máximo por componente y gama) y `data/final/perfiles_home_office.csv` (costo mediano = suma de medianas; rango = suma de Q1 y suma de Q3) con al menos 3 perfiles (FR-020, SC-007)
-- [ ] T033 [US3] Exportar `data/final/homeoffice_final.csv` con las columnas de `data-model.md` y verificar con `assert`: "cada publicación pertenece a exactamente una `gama`", máximo de nulos por columna solo en columnas declaradas "no aplica"/estructurales/MAR, y conservación ≥ 95 % de ofertas únicas válidas (SC-004, SC-005)
+- [X] T027 [US3] Transformaciones con justificación: `log_precio = log10(precio)`, codificación binaria (`get_dummies`) de `componente` y `envio`, y escalamiento para comparar variables (FR-016) en `notebooks/04_transformacion_e_ingenieria_de_caracteristicas.ipynb`
+- [X] T028 [US3] Construir `marca` (diccionario de marcas por componente; `otra` si no se reconoce) y `sobrecosto_cuotas_pct` (FR-017)
+- [X] T029 [US3] Extraer especificaciones del título: `ram_gb` y `almacenamiento_gb` (laptop), `pulgadas` (monitor), `inalambrico` (teclado, mouse, audífonos), `ergonomica` (silla); nulo "no aplica" en los demás componentes (FR-017)
+- [X] T030 [US3] Tabla de variables derivadas con regla, cobertura y aporte esperado al análisis; `assert` de al menos 10 variables derivadas (FR-019, SC-006)
+- [X] T031 [US3] Discretizar el precio en terciles por componente con `qcut` → `gama` ∈ {económica, media, alta}; publicar los límites; contrastar con K-Means de una dimensión; validar con una variable distinta del precio (FR-018)
+- [X] T032 [US3] Calcular `data/final/precios_por_gama.csv` (n, mínimo, Q1, mediana, Q3, máximo por componente y gama) y `data/final/perfiles_home_office.csv` (costo mediano = suma de medianas; rango = suma de Q1 y suma de Q3) con al menos 3 perfiles (FR-020, SC-007)
+- [X] T033 [US3] Exportar `data/final/homeoffice_final.csv` con las columnas de `data-model.md` y verificar con `assert`: "cada publicación pertenece a exactamente una `gama`", máximo de nulos por columna solo en columnas declaradas "no aplica"/estructurales/MAR, y conservación ≥ 95 % de ofertas únicas válidas (SC-004, SC-005)
 
 **Checkpoint**: dataset final listo
 

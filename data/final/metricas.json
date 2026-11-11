@@ -38,6 +38,185 @@
     "03_homeoffice": {
       "entrada": 2714,
       "salida": 2714
+    },
+    "04_homeoffice": {
+      "entrada": 2714,
+      "salida": 2714
+    }
+  },
+  "caracteristicas": {
+    "cobertura_marca": {
+      "audifonos": 80.7,
+      "laptop": 97.7,
+      "monitor": 90.9,
+      "mouse": 79.6,
+      "silla": 33.6,
+      "teclado": 80.0
+    },
+    "cobertura_specs": {
+      "almacenamiento_gb": 92.8,
+      "ergonomica": 100.0,
+      "inalambrico": 100.0,
+      "pulgadas": 89.4,
+      "ram_gb": 90.7
+    },
+    "coincidencia_qcut_kmeans": {
+      "audifonos": 77.49469214437367,
+      "laptop": 78.3157894736842,
+      "monitor": 72.67080745341616,
+      "mouse": 94.52631578947368,
+      "silla": 56.59574468085107,
+      "teclado": 79.70588235294119
+    },
+    "con_descuento": 1522,
+    "descuento_inflado": 7,
+    "limites_gama": {
+      "audifonos": {
+        "alta hasta": 3888.0,
+        "económica hasta": 99.0,
+        "media hasta": 249.0
+      },
+      "laptop": {
+        "alta hasta": 18499.0,
+        "económica hasta": 3589.0,
+        "media hasta": 6279.0
+      },
+      "monitor": {
+        "alta hasta": 7999.0,
+        "económica hasta": 553.59,
+        "media hasta": 1082.33
+      },
+      "mouse": {
+        "alta hasta": 853.0,
+        "económica hasta": 60.71,
+        "media hasta": 155.0
+      },
+      "silla": {
+        "alta hasta": 45499.0,
+        "económica hasta": 379.0,
+        "media hasta": 682.33
+      },
+      "teclado": {
+        "alta hasta": 1649.0,
+        "económica hasta": 159.0,
+        "media hasta": 300.0
+      }
+    },
+    "validacion_gamas": {
+      "alta": {
+        "laptop: RAM mediana (GB)": 32.0,
+        "laptop: almacenamiento mediano (GB)": 1024.0,
+        "monitor: pulgadas medianas": 27.0,
+        "periféricos: % inalámbricos": 56.7,
+        "silla: % ergonómicas": 57.3
+      },
+      "económica": {
+        "laptop: RAM mediana (GB)": 16.0,
+        "laptop: almacenamiento mediano (GB)": 512.0,
+        "monitor: pulgadas medianas": 24.0,
+        "periféricos: % inalámbricos": 57.9,
+        "silla: % ergonómicas": 34.2
+      },
+      "media": {
+        "laptop: RAM mediana (GB)": 16.0,
+        "laptop: almacenamiento mediano (GB)": 512.0,
+        "monitor: pulgadas medianas": 27.0,
+        "periféricos: % inalámbricos": 57.0,
+        "silla: % ergonómicas": 49.0
+      }
+    },
+    "variables_derivadas": 24
+  },
+  "costos": {
+    "medianas_por_componente": {
+      "audifonos": 150.0,
+      "laptop": 4599.0,
+      "monitor": 750.0,
+      "mouse": 98.0,
+      "silla": 499.5,
+      "teclado": 229.0
+    },
+    "perfiles": {
+      "alto": {
+        "costo_mediano": 12322.58,
+        "costo_q1": 10463.63,
+        "costo_q3": 16238.76
+      },
+      "económico": {
+        "costo_mediano": 3644.11,
+        "costo_q1": 2812.3,
+        "costo_q3": 4201.99
+      },
+      "medio": {
+        "costo_mediano": 6331.5,
+        "costo_q1": 5490.54,
+        "costo_q3": 7373.38
+      }
+    },
+    "suma_medianas_parte1": 6335.44,
+    "suma_medianas_sin_gama": 6325.5
+  },
+  "dataset_final": {
+    "columnas": 41,
+    "conservadas_pct": 99.96316758747697,
+    "conservadas_vs_todas_las_unicas_pct": 93.81265122709989,
+    "filas": 2714,
+    "max_nulos_no_justificado": 2.1002210759027267,
+    "nulos": {
+      "almacenamiento_gb": 83.75,
+      "atipico_precio": 0.0,
+      "calificacion": 63.82,
+      "componente": 0.0,
+      "descuento_anunciado_pct": 43.92,
+      "descuento_inflado": 0.0,
+      "descuento_pct": 0.0,
+      "en_ambas_capturas": 0.0,
+      "entrega_manana": 0.0,
+      "envio": 0.0,
+      "envio_gratis": 0.0,
+      "ergonomica": 82.68,
+      "es_gamer": 0.0,
+      "es_publicidad": 0.0,
+      "fecha_extraccion": 0.0,
+      "gama": 0.0,
+      "id_catalogo": 0.0,
+      "id_oferta": 0.0,
+      "inalambrico": 52.62,
+      "log_precio": 0.0,
+      "marca": 0.0,
+      "monto_cuota": 2.1,
+      "numero_cuotas": 2.1,
+      "ofrece_cuotas": 0.0,
+      "pagina": 0.0,
+      "posicion_pagina": 0.0,
+      "precio": 0.0,
+      "precio_13_09": 71.74,
+      "precio_anterior": 43.92,
+      "precio_relativo": 0.0,
+      "pulgadas": 84.08,
+      "ram_gb": 84.12,
+      "tienda_de_marca": 0.0,
+      "tiene_descuento": 0.0,
+      "tiene_resenas": 0.0,
+      "titulo": 0.0,
+      "url_publicacion": 0.0,
+      "variacion_precio_pct": 71.74,
+      "vendedor": 0.0,
+      "vendedor_visible": 0.0,
+      "vendidos_min": 63.15
+    },
+    "nulos_justificados": {
+      "almacenamiento_gb": "no aplica: solo laptops",
+      "calificacion": "MAR: la tarjeta no muestra reseñas",
+      "descuento_anunciado_pct": "estructural: sin promoción",
+      "ergonomica": "no aplica: solo sillas",
+      "inalambrico": "no aplica: solo periféricos",
+      "precio_13_09": "solo ofertas presentes en ambas capturas",
+      "precio_anterior": "estructural: sin promoción",
+      "pulgadas": "no aplica: solo monitores",
+      "ram_gb": "no aplica: solo laptops",
+      "variacion_precio_pct": "solo ofertas presentes en ambas capturas",
+      "vendidos_min": "MAR: la tarjeta no muestra reseñas"
     }
   },
   "faltantes": {
@@ -126,6 +305,10 @@
     "f03_variacion_precio": {
       "lectura": "De 767 ofertas presentes en ambas capturas, 573 (75 %) mantuvieron exactamente el mismo precio. Entre las que cambiaron dominan las subidas: 105 subieron y 89 bajaron, con una variación mediana de +1.9 %. Un precio de referencia es estable en el corto plazo, pero conviene fecharlo.",
       "pregunta": "¿Cambian los precios de una misma oferta en dos días?"
+    },
+    "f04_validacion_gamas": {
+      "lectura": "En parte, y cada componente de forma distinta. La RAM mediana de las laptops es 16, 16 y 32 GB en las gamas económica, media y alta: la memoria distingue a la gama alta. El monitor mediano mide 24, 27 y 27 pulgadas: el tamaño distingue a la gama económica. Las sillas ergonómicas pasan de 34 % a 57 %. En cambio, la proporción de periféricos inalámbricos apenas cambia (57–58 %): la conexión inalámbrica no es lo que encarece un teclado, un mouse o unos audífonos.",
+      "pregunta": "¿Las gamas definidas por precio corresponden a equipos distintos?"
     }
   },
   "ingesta": {
