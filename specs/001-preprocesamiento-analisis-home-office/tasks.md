@@ -26,10 +26,10 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 **Purpose**: Estructura exigida por el enunciado y dependencias
 
-- [ ] T001 Renombrar `datos/` → `data/` y `documentos/` → `docs/` con `git mv`, conservando subcarpetas, y crear `data/intermedio/`, `data/evidencia/`, `data/final/`, `docs/parte_2/figuras/` y `docs/diccionarios/`
-- [ ] T002 [P] Actualizar las rutas `datos`/`documentos` a `data`/`docs` en `notebooks/ACD_Proyecto_Parte_I.ipynb`, `notebooks/generar_figuras.ipynb` y `notebooks/generar_figuras_ppt.ipynb` (sin tocar `data/ec1_homeoffice/EC1_scraping_mercadolibre.ipynb`, registro archivado)
-- [ ] T003 [P] Mover el diccionario de la Parte I a `docs/diccionarios/diccionario_inicial_categorias.docx` y `.pdf`
-- [ ] T004 [P] Añadir a `requirements.txt` seaborn, scipy, scikit-learn, python-docx y python-pptx con versión mínima
+- [X] T001 Renombrar `datos/` → `data/` y `documentos/` → `docs/` con `git mv`, conservando subcarpetas, y crear `data/intermedio/`, `data/evidencia/`, `data/final/`, `docs/parte_2/figuras/` y `docs/diccionarios/`
+- [X] T002 [P] Actualizar las rutas `datos`/`documentos` a `data`/`docs` en `notebooks/ACD_Proyecto_Parte_I.ipynb`, `notebooks/generar_figuras.ipynb` y `notebooks/generar_figuras_ppt.ipynb` (sin tocar `data/ec1_homeoffice/EC1_scraping_mercadolibre.ipynb`, registro archivado)
+- [X] T003 [P] Mover el diccionario de la Parte I a `docs/diccionarios/diccionario_inicial_categorias.docx` y `.pdf`
+- [X] T004 [P] Añadir a `requirements.txt` seaborn, scipy, scikit-learn, python-docx y python-pptx con versión mínima
 
 ---
 
