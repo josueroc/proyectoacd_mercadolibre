@@ -159,7 +159,8 @@ US5, por eso la fase de US5 va antes que la de US4.
   - Resultado: copia limpia, pipeline en 46–50 s, salida 0; CSV finales idénticos a los versionados (manifiesto SHA-256); dos ejecuciones seguidas dejan los cinco notebooks byte a byte iguales; consulta SQL de ejemplo correcta; el escenario de invariante roto se detiene en la etapa 03 con `AssertionError: … id_oferta repetido`, salida 1.
 - [X] T048 Verificar que cada cifra del informe y de la presentación coincide con `data/final/metricas.json`, y que cada técnica usada en los notebooks cita su sesión del curso (U3–U5) o su justificación de excepción (NFR-005)
   - Resultado: las cifras del informe y la presentación se leen de `metricas.json`; las escritas a mano (S/ 29 000, V de Cramér 0,995, p < 0,001, cobertura de marca > 79 % salvo sillas, 5 tablas) coinciden con los datos. Cada notebook cita sus sesiones (U3_L2–U3_L8, U3_T2–U3_T5, U4_L1, U4_T1, U5_T1); Mann-Whitney, Spearman y Mahalanobis llevan su justificación.
-- [ ] T049 Commits por etapa con Conventional Commits (NFR-007), push a `feature/parte-2-preprocesamiento` y Pull Request hacia `main`
+- [X] T049 Commits por etapa con Conventional Commits (NFR-007), push a `feature/parte-2-preprocesamiento` y Pull Request hacia `main`
+  - Resultado: rama publicada y Pull Request #1 hacia `main`.
 
 ---
 
