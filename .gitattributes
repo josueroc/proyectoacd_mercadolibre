@@ -1,0 +1,10 @@
+# Salidas de la Parte II con fin de línea LF en cualquier sistema: así los CSV son idénticos byte a byte entre
+# máquinas y data/final/manifiesto.json puede comprobar el determinismo (NFR-002). Los datos crudos de la Parte I
+# no se listan aquí a propósito: son de solo lectura y se conservan tal como se capturaron.
+data/intermedio/** text eol=lf
+data/evidencia/** text eol=lf
+data/final/*.csv text eol=lf
+data/final/*.json text eol=lf
+notebooks/*.ipynb text eol=lf
+notebooks/*.py text eol=lf
+*.sqlite binary

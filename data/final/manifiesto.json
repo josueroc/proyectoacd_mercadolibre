@@ -1,0 +1,22 @@
+{
+  "homeoffice_final.csv": {
+    "columnas": 41,
+    "filas": 2714,
+    "sha256": "ac4599518a53ed3a26e0e360775ef9305664dc1df9276feea20c541480c30004"
+  },
+  "integracion_ofertas_comunes.csv": {
+    "columnas": 5,
+    "filas": 767,
+    "sha256": "a7466782a35f77d5ee05a182c79374df520f454e8555d60099b206f2ecb70382"
+  },
+  "perfiles_home_office.csv": {
+    "columnas": 10,
+    "filas": 3,
+    "sha256": "f06aedb9fe3969b9b7bce97b48e0faa02da8b92f256368e4632a80468cc711b3"
+  },
+  "precios_por_gama.csv": {
+    "columnas": 8,
+    "filas": 18,
+    "sha256": "d5553835359ee4278cb94ab8b24a999e6c04a2c8bc87a794590f7663044dd1c6"
+  }
+}

@@ -115,9 +115,9 @@ US5, por eso la fase de US5 va antes que la de US4.
 
 **Independent Test**: En una copia limpia, `python pipeline.py` termina con código 0 y una segunda ejecución no cambia ningún CSV (quickstart, escenarios 1–3).
 
-- [ ] T034 [US5] Implementar `pipeline.py` según `contracts/pipeline-cli.md` (NFR-001): etapas 01–06, `--desde` y `--hasta`, ejecución de notebooks con `nbconvert`, registro de inicio, duración y resultado, y detención con código ≠ 0 en la primera etapa fallida (FR-024, FR-026)
-- [ ] T035 [US5] Implementar la etapa 05 de carga en `pipeline.py`: `data/final/home_office.sqlite` con las tablas `publicaciones`, `precios_por_gama`, `perfiles`, `ofertas_comunes` y `excluidos`, y `data/final/manifiesto.json` con filas, columnas y SHA-256 de cada CSV final (FR-025)
-- [ ] T036 [US5] Ejecutar `python pipeline.py --hasta 05` dos veces y comprobar que los CSV y el manifiesto no cambian (NFR-002); ejecutar el escenario 3 del quickstart en una copia temporal
+- [X] T034 [US5] Implementar `pipeline.py` según `contracts/pipeline-cli.md` (NFR-001): etapas 01–06, `--desde` y `--hasta`, ejecución de notebooks con `nbconvert`, registro de inicio, duración y resultado, y detención con código ≠ 0 en la primera etapa fallida (FR-024, FR-026)
+- [X] T035 [US5] Implementar la etapa 05 de carga en `pipeline.py`: `data/final/home_office.sqlite` con las tablas `publicaciones`, `precios_por_gama`, `perfiles`, `ofertas_comunes` y `excluidos`, y `data/final/manifiesto.json` con filas, columnas y SHA-256 de cada CSV final (FR-025)
+- [X] T036 [US5] Ejecutar `python pipeline.py --hasta 05` dos veces y comprobar que los CSV y el manifiesto no cambian (NFR-002); ejecutar el escenario 3 del quickstart en una copia temporal
 
 **Checkpoint**: pipeline reproducible
 
