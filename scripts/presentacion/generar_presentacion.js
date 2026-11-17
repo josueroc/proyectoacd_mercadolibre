@@ -19,6 +19,22 @@ const FIGURAS = path.join(RAIZ, 'docs', 'parte_2', 'figuras');
 const IMAGENES = path.join(RAIZ, 'docs', 'parte_2', 'presentacion', 'imagenes');
 const SALIDA = path.join(RAIZ, 'docs', 'parte_2', 'presentacion', 'Presentacion_Parte_II_DS3021.pptx');
 
+// Notas del orador: se copian del guion que lee el equipo, para que ambos digan lo mismo.
+const GUION = fs.readFileSync(path.join(RAIZ, 'docs', 'parte_2', 'presentacion', 'guion_presentacion.md'), 'utf8');
+function nota(n) {
+  let quien = '';
+  for (const bloque of GUION.split(/^(?=##+ )/m)) {
+    const h2 = bloque.match(/^## (\S+) —/);
+    if (h2) quien = h2[1];
+    const h3 = bloque.match(/^### (\d+) · [^\n]*?(?:\(≈ ([^)]+)\))?\n/);
+    if (h3 && Number(h3[1]) === n) {
+      const cuerpo = bloque.slice(h3[0].length).replace(/\*\*|\*|`/g, '').trim();
+      return h3[2] ? `[${quien} · ${h3[2]}]\n${cuerpo}` : cuerpo;
+    }
+  }
+  throw new Error(`El guion no tiene la diapositiva ${n}`);
+}
+
 // ------------------------------------------------------------------ tema
 const TEMA = {
   name: 'Home office · datos',
@@ -156,11 +172,7 @@ async function main() {
     ], { x: 0.6, y: 5.3, w: 7.2, h: 0.7, fontSize: 15, color: C.background1 });
     texto(s, 'Análisis Computacional de Datos · UTEC · 2026', {
       x: 0.6, y: 6.15, w: 7.2, h: 0.35, fontSize: 12, color: C.accent5, fontFace: MONO });
-    s.addNotes(`[Yared · 20 s] Buenos días, somos el grupo de Mercado Libre. En la Parte I construimos, con web `
-      + `scraping, una base de precios de equipos de home office. En esta Parte II la preprocesamos, la integramos, `
-      + `construimos variables y la analizamos para responder una pregunta concreta: cuánto cuesta equipar un home `
-      + `office en el Perú y qué conviene saber al comprar o al compensar esos equipos. Presentamos los cinco, en el `
-      + `orden de la agenda.`);
+    s.addNotes(nota(1));
   }
 
   // ================================================================ 2. agenda
@@ -186,9 +198,7 @@ async function main() {
       texto(s, tiempo, { x: 11.75, y, w: 0.8, h: 0.68, fontSize: 12, color: C.text2, fontFace: MONO,
         valign: 'middle', align: 'right' });
     });
-    s.addNotes(`[Yared · 15 s] Este es el recorrido. Seguimos el mismo orden del pipeline: primero el problema, `
-      + `luego cómo entran y se limpian los datos, después las variables que construimos y, al final, los resultados `
-      + `y una demostración en vivo del pipeline. Cada bloque responde a una sección del informe.`);
+    s.addNotes(nota(2));
   }
 
   // ================================================================ 3. problema
@@ -219,12 +229,7 @@ async function main() {
       { text: '¿Cuánto cuesta un home office según el nivel de equipamiento y qué señales del mercado ayudan o '
         + 'engañan al comprar?' },
     ], { x: 5.5, y: 5.6, w: 7.0, h: 0.95, fontSize: 15, valign: 'middle' });
-    s.addNotes(`[Yared · 45 s] La Ley 31572 obliga al empleador a dar los equipos o a compensar los del `
-      + `trabajador según su valor de mercado, pero en el Perú no hay una fuente pública de ese valor. La Parte I `
-      + `estimó una cifra única, ${soles(M.costos.suma_medianas_parte1)}, sumando medianas. Al preprocesar descubrimos `
-      + `que esa cifra oculta mucho: un home office de gama alta cuesta ${num(perf.alto.costo_mediano / perf['económico'].costo_mediano)} `
-      + `veces uno económico. Por eso reformulamos la pregunta: cuánto cuesta según el nivel de equipamiento, y qué `
-      + `señales del mercado, como descuentos, cuotas o reputación, ayudan o engañan.`);
+    s.addNotes(nota(3));
   }
 
   // ================================================================ 4. contexto actualizado
@@ -251,11 +256,7 @@ async function main() {
       texto(s, t, { x: x + 1.3, y: y + 0.28, w: 4.45, h: 0.45, fontSize: 17, bold: true, fontFace: TEMA.headFontFace });
       texto(s, d, { x: x + 1.3, y: y + 0.85, w: 4.45, h: 1.2, fontSize: 14, color: C.text2 });
     });
-    s.addNotes(`[Yared · 40 s] El contexto se actualizó con cuatro hallazgos del preprocesamiento. Uno: la Parte I `
-      + `identificaba por código de catálogo, pero varios vendedores comparten ese código; la unidad correcta es la `
-      + `oferta. Dos: una búsqueda trae accesorios y kits, que no son el componente. Tres: los datos faltantes no son `
-      + `aleatorios, lo que decide cómo tratarlos. Y cuatro: los precios casi no cambian en dos días, así que una `
-      + `referencia de costo es estable, aunque hay que fecharla.`);
+    s.addNotes(nota(4));
   }
 
   // ================================================================ 5. objetivos
@@ -282,10 +283,7 @@ async function main() {
       texto(s, como, { x: 5.6, y, w: 3.7, h: 0.66, fontSize: 14, color: C.text2, valign: 'middle' });
       texto(s, r, { x: 9.4, y, w: 3.15, h: 0.66, fontSize: 14, bold: true, color: C.accent4, valign: 'middle' });
     });
-    s.addNotes(`[Yared · 35 s] Con eso ajustamos los objetivos. Ya no buscamos una cifra, sino un costo por perfil `
-      + `con su rango. Cada objetivo tiene un indicador medible, que es la columna de la derecha: por ejemplo, `
-      + `${integ.comunes_por_oferta} ofertas comunes entre capturas o salidas idénticas en dos ejecuciones del pipeline. `
-      + `Ahora Franco explica cómo está armado el pipeline.`);
+    s.addNotes(nota(5));
   }
 
   // ================================================================ 6. pipeline
@@ -333,14 +331,7 @@ async function main() {
       texto(s, t, { x: x + 0.5, y, w: 2.55, h: 0.35, fontSize: 15, bold: true });
       texto(s, d, { x: x + 0.5, y: y + 0.36, w: 2.55, h: 0.55, fontSize: 12, color: C.text2 });
     });
-    s.addNotes(`[Franco · 60 s] El pipeline sigue el ciclo de vida de ingeniería de datos del curso: generación, `
-      + `ingestión, transformación, almacenamiento y serving. La generación fue el scraping de la Parte I; la Parte II `
-      + `no vuelve a consultar el sitio. Cada etapa es un notebook que lee el archivo de la anterior y escribe el suyo. `
-      + `El almacenamiento es SQLite: en clase se usó SQL Server, pero SQLite no necesita servidor y cualquiera `
-      + `reproduce el flujo con requirements.txt. Hay cuatro controles transversales: assert en cada etapa, balance de `
-      + `registros, evidencia de cada exclusión y un manifiesto con el hash de cada CSV. Todo corre con un solo `
-      + `comando en unos 20 segundos. Si preguntan por qué notebooks y no scripts: cada decisión queda junto a su `
-      + `justificación y sus gráficos, y el orquestador no duplica lógica.`);
+    s.addNotes(nota(6));
   }
 
   // ================================================================ 7. ingesta
@@ -378,13 +369,7 @@ async function main() {
       texto(s, t, { x: 7.65, y: y + 0.18, w: 4.85, h: 0.4, fontSize: 15, bold: true });
       texto(s, d, { x: 7.65, y: y + 0.6, w: 4.85, h: 0.85, fontSize: 13, color: C.text2 });
     });
-    s.addNotes(`[Franco · 60 s] La ingesta parte de ${miles(M.ingesta.filas_crudo_ho)} registros crudos. Primero `
-      + `validamos el esquema y convertimos los textos a números con expresiones regulares ancladas: si un formato no `
-      + `encaja, no lo adivinamos, lo registramos; no hubo ninguno. Aquí corregimos un error de la Parte I: "+100 `
-      + `vendidos" son unidades vendidas, no opiniones. Luego deduplicamos por oferta, usando el parámetro wid de la `
-      + `URL: se fueron ${lim.duplicados} repeticiones. Después separamos ${ajenas} publicaciones que no son una unidad `
-      + `del componente: accesorios, kits y otros productos. Quedan ${miles(M.dataset_final.filas)} ofertas, el 99,96 % `
-      + `de las válidas. Cada exclusión está en data/evidencia con su motivo. Le paso a Mauricio con la calidad de datos.`);
+    s.addNotes(nota(7));
   }
 
   // ================================================================ 8. faltantes
@@ -416,14 +401,7 @@ async function main() {
       texto(s, cols, { x: 7.72, y: y + 0.8, w: 4.8, h: 0.3, fontSize: 11, fontFace: MONO, color: C.text1 });
       texto(s, trat, { x: 7.72, y: y + 1.1, w: 4.8, h: 0.4, fontSize: 12, bold: true });
     });
-    s.addNotes(`[Mauricio · 60 s] Para cada columna con faltantes probamos con chi-cuadrado si faltar depende del `
-      + `componente o de la página de resultados. En las seis el p fue menor a 0,001, así que ninguna es MCAR y borrar `
-      + `filas sesgaría la muestra. Hay dos tipos. MNAR estructural: el precio anterior falta porque no hay promoción; `
-      + `lo codificamos como descuento cero con un indicador. MAR: las reseñas faltan más en los productos caros, que `
-      + `se venden menos. No imputamos: si rellenáramos con la mediana, el 48 % de las ofertas tendría la misma `
-      + `calificación y le daríamos a un producto caro la reputación de uno barato. Si preguntan por MNAR frente a MAR: `
-      + `es MNAR cuando el valor no existe por la propia naturaleza del dato, y MAR cuando su ausencia se explica con `
-      + `otra variable observada, aquí el componente y el precio.`);
+    s.addNotes(nota(8));
   }
 
   // ================================================================ 9. atípicos
@@ -447,12 +425,7 @@ async function main() {
     });
     texto(s, `Se conservan ${at.conservados_marcados} extremos plausibles (sillas Steelcase, audífonos premium) marcados en atipico_precio: las medianas y la escala logarítmica los absorben.`,
       { x: 8.3, y: 6.1, w: 4.4, h: 0.7, fontSize: 11, color: C.text2 });
-    s.addNotes(`[Mauricio · 50 s] El precio tiene cola derecha, así que detectamos atípicos sobre el logaritmo del `
-      + `precio y dentro de cada componente, porque una silla de S/ 3 000 es rara pero una laptop de S/ 3 000 no. `
-      + `Encontramos ${at.univariados} univariados con IQR y puntuación z, y ${at.kmeans} multivariados con K-Means, `
-      + `contrastados con Mahalanobis. Revisamos los títulos: casi todos son productos reales, como sillas Steelcase. `
-      + `Solo eliminamos un error comprobable: una laptop de 8 GB a 29 mil soles. Los demás se marcan y se conservan, `
-      + `porque trabajamos con medianas, que no se mueven con extremos.`);
+    s.addNotes(nota(9));
   }
 
   // ================================================================ 10. integración
@@ -489,12 +462,7 @@ async function main() {
       texto(s, t, { x: 8.15, y, w: 4.55, h: 0.4, fontSize: 16, bold: true });
       texto(s, d, { x: 8.15, y: y + 0.45, w: 4.55, h: 1.1, fontSize: 13, color: C.text2 });
     });
-    s.addNotes(`[Mauricio · 50 s] Teníamos dos capturas: home office del 15 de septiembre y categorías del 13. `
-      + `Unirlas por código de catálogo, como en la Parte I, encuentra ${integ.comunes_por_catalogo} ofertas comunes; `
-      + `unirlas por oferta encuentra ${integ.comunes_por_oferta}, tres veces más. Elegimos la dirección "agregar `
-      + `atributos": a cada oferta le sumamos su precio del 13, y así medimos estabilidad. El ${num(integ.sin_cambio_pct, 0)} % `
-      + `no cambió de precio. En reducción retiramos la columna busqueda, redundante con componente según la V de `
-      + `Cramér. Josué sigue con las variables derivadas.`);
+    s.addNotes(nota(10));
   }
 
   // ================================================================ 11. variables
@@ -532,13 +500,7 @@ async function main() {
       texto(s, vars, { x: x + 0.85, y: y + 0.65, w: 4.9, h: 0.5, fontSize: 11, fontFace: MONO, color: C.accent4 });
       texto(s, nota, { x: x + 0.85, y: y + 1.15, w: 4.9, h: 0.4, fontSize: 12, color: C.text2 });
     });
-    s.addNotes(`[Josué · 60 s] Primero, cuatro transformaciones. El logaritmo corrige la cola derecha del precio. La `
-      + `puntuación z se calcula dentro de cada componente, para comparar un mouse con una laptop en desviaciones y `
-      + `no en soles: la llamamos precio_relativo. get_dummies convierte el envío, que es nominal, en indicadores. Y `
-      + `qcut define las gamas, que justifico en la siguiente diapositiva. Luego construimos ${car.variables_derivadas} `
-      + `variables en cuatro familias. Las especificaciones salen del título con expresiones regulares y cubren cerca `
-      + `del 90 % de su componente. Cada variable tiene una regla y un uso en el análisis, documentados en el notebook `
-      + `04 y en el diccionario final.`);
+    s.addNotes(nota(11));
   }
 
   // ================================================================ 12. qcut frente a K-Means
@@ -588,15 +550,7 @@ async function main() {
       { text: 'Honestidad metodológica  ', options: { bold: true, color: 'B45309' } },
       { text: `K-Means separa mejor (silueta ${num(silK, 2)} frente a ${num(silQ, 2)}): optimiza eso. Se conserva como contraste.` },
     ], { x: 8.4, y: 5.9, w: 4.15, h: 0.85, fontSize: 12, valign: 'middle' });
-    s.addNotes(`[Josué · 75 s] Esta es la decisión que más nos pueden preguntar. Para las gamas teníamos dos métodos `
-      + `del curso: discretizar por igual frecuencia con qcut o agrupar con K-Means. Aplicamos ambos sobre el `
-      + `log-precio. Coinciden entre 57 y 95 % según el componente. K-Means separa mejor los grupos, su silueta es `
-      + `${num(silK, 2)} frente a ${num(silQ, 2)}, lo cual es esperable porque eso es lo que optimiza. Pero mire las barras: `
-      + `deja grupos muy desbalanceados, por ejemplo solo ${menor} sillas en gama alta. Elegimos qcut por tres razones. `
-      + `Uno: el costo por perfil suma la mediana de la misma gama en seis componentes, así que "gama alta" tiene que `
-      + `significar lo mismo en todos. Dos: una mediana con 19 datos es inestable. Tres: un percentil se le explica a `
-      + `recursos humanos sin hablar de centroides. Si preguntan por qué no más gamas: tres niveles corresponden a los `
-      + `tres perfiles de compra y mantienen más de cien ofertas por gama.`);
+    s.addNotes(nota(12));
   }
 
   // ================================================================ 13. validación de gamas
@@ -628,11 +582,7 @@ async function main() {
         + `suben de ${num(val['económica']['silla: % ergonómicas'], 0)} % a ${num(val.alta['silla: % ergonómicas'], 0)} %. `
         + `Lo inalámbrico no cambia entre gamas (${num(Math.min(...inal), 0)}–${num(Math.max(...inal), 0)} %): no es lo que encarece un periférico.` },
     ], { x: 1.45, y: 5.65, w: 11.05, h: 1.0, fontSize: 14, valign: 'middle' });
-    s.addNotes(`[Josué · 45 s] Una gama definida por precio podría ser arbitraria, así que la validamos con variables `
-      + `que no son el precio. En laptops, la RAM mediana pasa de 16 a 32 GB en la gama alta. En monitores, el tamaño `
-      + `separa la gama económica. En sillas, las ergonómicas pasan de un tercio a más de la mitad. En cambio, lo `
-      + `inalámbrico no cambia entre gamas. Es una validación parcial y lo decimos en las limitaciones. Con las gamas `
-      + `listas, Alvaro presenta los resultados.`);
+    s.addNotes(nota(13));
   }
 
   // ================================================================ 14. costo por perfil
@@ -668,12 +618,7 @@ async function main() {
       bold: true, color: HEX.accent2, fontFace: TEMA.headFontFace });
     texto(s, 'del costo de cada perfil es la laptop. Teclado, mouse y audífonos juntos no llegan al 11 %.',
       { x: 9.55, y: 4.95, w: 3.0, h: 1.6, fontSize: 14, color: 'FFFFFF' });
-    s.addNotes(`[Alvaro · 50 s] Esta es la respuesta. Sumando la mediana de cada componente en la misma gama, un home `
-      + `office cuesta ${soles(perf['económico'].costo_mediano)} en perfil económico, ${soles(perf.medio.costo_mediano)} `
-      + `en el medio y ${soles(perf.alto.costo_mediano)} en el alto. Debajo va el rango, que suma los cuartiles 1 y 3; `
-      + `no es un intervalo de confianza, es la mitad central de la oferta. La cifra de la Parte I coincide con el `
-      + `perfil medio, pero escondía esta dispersión. Y la barra muestra dónde se va el dinero: la laptop es entre `
-      + `${num(lap.alto, 0)} y ${num(lap['económico'], 0)} % del total. Elegir su gama es la decisión que más mueve el presupuesto.`);
+    s.addNotes(nota(14));
   }
 
   // ================================================================ 15. laptop
@@ -703,10 +648,7 @@ async function main() {
       fontSize: 18, bold: true, fontFace: TEMA.headFontFace, color: C.accent4, valign: 'middle' });
     texto(s, `mediana por marca, de ${grafia(orden[0][0])} a ${grafia(orden[orden.length - 1][0])} (marcas con 10 o más laptops).`,
       { x: 10.25, y: 5.4, w: 2.3, h: 1.25, fontSize: 12, color: C.text2 });
-    s.addNotes(`[Alvaro · 30 s] Como la laptop decide el presupuesto, la miramos por dentro. La memoria marca `
-      + `escalones claros: la mediana pasa de ${soles(ram['8.0'])} con 8 GB a ${soles(ram['16.0'])} con 16 y `
-      + `${soles(ram['32.0'])} con 32. Para trabajo de oficina, 16 GB es la configuración más ofrecida y cae en la `
-      + `gama media: es la recomendación práctica.`);
+    s.addNotes(nota(15));
   }
 
   // ================================================================ 16. promociones
@@ -740,14 +682,7 @@ async function main() {
       valign: 'middle' });
     texto(s, `Perfil medio en 12 cuotas: ${soles(an.cuota_mensual.medio['12 cuotas'])} al mes. Financiar no encarece; solo reparte el gasto.`,
       { x: 8.2, y: 5.45, w: 4.3, h: 1.1, fontSize: 13 });
-    s.addNotes(`[Alvaro · 50 s] ¿Una oferta con descuento es más barata? Comparamos el precio final con y sin `
-      + `promoción con Mann-Whitney, que compara rangos y no supone normalidad, algo que los precios no cumplen. En `
-      + `conjunto, las ofertas con descuento son algo más caras: precio relativo mediano ${num(an.promo_mediana_con, 2)} `
-      + `frente a ${num(an.promo_mediana_sin, 2)}, ${formatoP(an.promo_p)}. Por componente, son más caras en laptop, `
-      + `mouse y audífonos; solo en sillas son más baratas, y en monitor y teclado no hay diferencia. Conclusión: el `
-      + `porcentaje de descuento no dice nada, hay que comparar el precio final. Las cuotas, en cambio, son sin interés `
-      + `en el ${num(an.cuotas_pct, 0)} % de las ofertas. Si preguntan qué es el precio relativo: es la puntuación z del `
-      + `log-precio dentro del componente, para poder juntar componentes en una sola prueba.`);
+    s.addNotes(nota(16));
   }
 
   // ================================================================ 17. gamer y reputación
@@ -782,12 +717,7 @@ async function main() {
     });
     texto(s, `Solo el ${num(100 - M.faltantes.diagnostico.calificacion.pct, 0)} % de las ofertas muestra reseñas y faltan más en las caras: la reputación describe sobre todo a los productos baratos.`,
       { x: 7.95, y: 5.95, w: 4.75, h: 0.75, fontSize: 11, color: C.text2 });
-    s.addNotes(`[Alvaro · 45 s] Dos señales más. La etiqueta gamer: el gráfico muestra cuántas desviaciones se aleja `
-      + `lo gamer del resto de su componente. Hay diferencias en ambos sentidos, pero con Mann-Whitney solo son `
-      + `significativas en laptop y mouse, que es justo donde lo gamer cuesta más. Para oficina no conviene pagarlo. `
-      + `Y la reputación, con Spearman porque las ventas y la calificación son ordinales y asimétricas: las ventas casi `
-      + `no se relacionan con el precio, ρ ${num(sv.rho, 2)}, mientras que la calificación sí, ρ ${num(sc.rho, 2)}. `
-      + `Lo más vendido es barato; lo mejor calificado, caro. Ojo: solo un tercio de las ofertas tiene reseñas.`);
+    s.addNotes(nota(17));
   }
 
   // ================================================================ 18. recomendaciones
@@ -815,11 +745,7 @@ async function main() {
         fontFace: TEMA.headFontFace });
       texto(s, d, { x: x + 0.25, y: y + 1.45, w: 3.45, h: 0.8, fontSize: 13, color: C.text2 });
     });
-    s.addNotes(`[Alvaro · 40 s] Todo esto se traduce en recomendaciones con su usuario y su cifra. Para recursos `
-      + `humanos, la principal: fijar la compensación de la Ley 31572 por perfil y declarar la fecha de los precios. `
-      + `Para el trabajador: decidir primero la gama de la laptop, comparar el precio final y no el porcentaje de `
-      + `descuento, aprovechar las cuotas sin interés, evitar lo gamer y, en sillas, sumar el envío. El informe tiene `
-      + `${ins.length} insights, cada uno con la cifra que lo respalda. Ahora Franco hace la demostración.`);
+    s.addNotes(nota(18));
   }
 
   // ================================================================ 19. demo
@@ -846,12 +772,7 @@ async function main() {
     texto(s, [{ text: 'Plan B: ', options: { bold: true, color: 'B45309' } },
       { text: 'si falla la conexión, se muestran los notebooks con sus salidas guardadas en GitHub.' }],
     { x: 5.75, y: 6.05, w: 6.8, h: 0.65, fontSize: 13, valign: 'middle' });
-    s.addNotes(`[Franco · 2 min] Compartir la terminal, ya ubicada en la carpeta del repositorio y con el entorno `
-      + `instalado. Paso 1: ejecutar python pipeline.py y comentar cada etapa mientras aparece el OK; dura unos 20 `
-      + `segundos. Paso 2: abrir el notebook 05 y mostrar la primera celda: lee el almacén SQLite con SQL, no los CSV, `
-      + `que es la etapa de serving. Bajar hasta el gráfico de costo por perfil. Paso 3: abrir data/final/manifiesto.json `
-      + `y mostrar el hash; ejecutar git status data/final para mostrar que los CSV no cambiaron. Si algo falla, abrir `
-      + `el notebook en GitHub con sus salidas. Devolver la palabra a Alvaro para el cierre.`);
+    s.addNotes(nota(19));
   }
 
   // ================================================================ 20. conclusiones
@@ -874,11 +795,7 @@ async function main() {
     texto(s, 'Dos capturas de un día, sin serie histórica · resultados ordenados por el sitio, no muestra aleatoria · '
       + 'reseñas en solo un tercio de las ofertas · especificaciones extraídas del título · precios publicados, sin envío.',
     { x: 0.85, y: 5.78, w: 7.4, h: 1.0, fontSize: 12, color: 'C9D3E0' });
-    s.addNotes(`[Alvaro · 40 s] Para cerrar. Respondimos la pregunta con un costo por perfil, con su rango y su fecha, `
-      + `que sirve para fijar una compensación. El preprocesamiento no fue un trámite: cambió los resultados. Y las `
-      + `señales del mercado engañan: el descuento y lo gamer no indican buen precio. Nuestras limitaciones son claras: `
-      + `dos capturas de un solo día, una muestra ordenada por el sitio y reseñas incompletas. Con capturas periódicas, `
-      + `este mismo pipeline actualizaría la referencia cada mes. Muchas gracias, quedamos atentos a sus preguntas.`);
+    s.addNotes(nota(20));
   }
 
   // ================================================================ anexo
@@ -904,11 +821,7 @@ async function main() {
         'Un p pequeño dice que la diferencia no es casual; su tamaño se lee en las medianas, no en el p', '—']),
     ], { x: 0.6, y: 1.7, w: 12.1, colW: [2.6, 3.0, 4.0, 2.5], border: { type: 'solid', pt: 0.75, color: 'D5D9E0' },
       fill: { color: 'FFFFFF' }, color: '0B1220', valign: 'middle', margin: 0.08, rowH: [0.45, 1.0, 1.0, 1.0, 0.8] });
-    s.addNotes('Diapositiva de respaldo: no se presenta, se usa si el profesor pregunta por una prueba. Mann-Whitney: '
-      + 'ordena todas las observaciones de ambos grupos, suma los rangos de cada grupo y calcula U; si un grupo '
-      + 'concentra los rangos altos, U se aleja de lo esperado y el p baja. Spearman: es la correlación de Pearson '
-      + 'aplicada a los rangos; va de −1 a 1. Chi-cuadrado: suma (observado − esperado)² / esperado en cada celda de '
-      + 'la tabla de contingencia. En los tres casos usamos scipy.stats: chi2_contingency, mannwhitneyu y spearmanr.');
+    s.addNotes(nota(21));
   }
   {
     const s = nueva();
@@ -936,8 +849,7 @@ async function main() {
     texto(s, 'Las columnas con más de 10 % de nulos lo son por diseño: especificaciones que solo aplican a un componente, '
       + 'precio anterior sin promoción y reseñas no mostradas. El diccionario final documenta las 41 variables.',
     { x: 0.6, y: 5.45, w: 7.4, h: 1.2, fontSize: 13, color: C.text2 });
-    s.addNotes('Diapositiva de respaldo para preguntas sobre el dataset o el diccionario de datos final. '
-      + 'Josué responde por el diccionario; las cifras salen de data/final/metricas.json.');
+    s.addNotes(nota(22));
   }
 
   await pres.writeFile({ fileName: SALIDA });
