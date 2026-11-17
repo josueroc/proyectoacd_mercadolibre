@@ -35,6 +35,22 @@
       "silla": -0.21,
       "teclado": 0.11
     },
+    "gamer_n": {
+      "audifonos": 56,
+      "laptop": 52,
+      "monitor": 209,
+      "mouse": 151,
+      "silla": 24,
+      "teclado": 96
+    },
+    "gamer_p": {
+      "audifonos": 0.7425746142879379,
+      "laptop": 0.005125395513203397,
+      "monitor": 0.36962134381107004,
+      "mouse": 1.904648536833622e-09,
+      "silla": 0.3466453371193221,
+      "teclado": 0.25765238415561764
+    },
     "kits": {
       "ahorro_pct": -3.2369443245576113,
       "mediana": 119.6,
@@ -106,7 +122,41 @@
       }
     },
     "promo_componentes_mas_caras": 4,
+    "promo_mediana_con": -0.0101,
+    "promo_mediana_sin": -0.11655,
     "promo_p": 0.0008432078172022539,
+    "promo_por_componente": {
+      "audifonos": {
+        "con promoción": 188.1,
+        "p (Mann-Whitney)": 9.197746281492207e-06,
+        "sin promoción": 129.0
+      },
+      "laptop": {
+        "con promoción": 4649.0,
+        "p (Mann-Whitney)": 0.04912497542581727,
+        "sin promoción": 4209.0
+      },
+      "monitor": {
+        "con promoción": 802.855,
+        "p (Mann-Whitney)": 0.05789843342163541,
+        "sin promoción": 707.0
+      },
+      "mouse": {
+        "con promoción": 115.0,
+        "p (Mann-Whitney)": 0.018459765878655405,
+        "sin promoción": 89.0
+      },
+      "silla": {
+        "con promoción": 465.005,
+        "p (Mann-Whitney)": 0.0375698507428711,
+        "sin promoción": 584.0
+      },
+      "teclado": {
+        "con promoción": 229.0,
+        "p (Mann-Whitney)": 0.5563322081477926,
+        "sin promoción": 229.0
+      }
+    },
     "promociones": {
       "audifonos": {
         "descuento_mediano": 32.01,
@@ -135,11 +185,11 @@
     },
     "silla_envio_gratis_pct": 66.59574468085107,
     "spearman_calificacion": {
-      "p": 7.119893676313728e-15,
+      "p": 7.119893676313802e-15,
       "rho": 0.2448658762874599
     },
     "spearman_vendidos": {
-      "p": 0.013910800357561245,
+      "p": 0.01391080035756126,
       "rho": -0.07775753960576377
     },
     "vendedor": {
@@ -147,28 +197,28 @@
         "diferencia": -0.4509,
         "mediana no": -0.0419,
         "mediana sí": -0.4928,
-        "p (Mann-Whitney)": 0.0,
+        "p (Mann-Whitney)": 1.7978486464831508e-05,
         "publicaciones": 91.0
       },
       "envío gratis": {
-        "diferencia": 0.2931,
+        "diferencia": 0.29309999999999997,
         "mediana no": -0.3339,
         "mediana sí": -0.0408,
-        "p (Mann-Whitney)": 0.0004,
+        "p (Mann-Whitney)": 0.0004053887012342938,
         "publicaciones": 2503.0
       },
       "tienda de la marca": {
-        "diferencia": 0.1944,
+        "diferencia": 0.19440000000000002,
         "mediana no": -0.0784,
         "mediana sí": 0.116,
-        "p (Mann-Whitney)": 0.0,
+        "p (Mann-Whitney)": 4.633562373967519e-06,
         "publicaciones": 352.0
       },
       "vendedor visible": {
         "diferencia": 0.2998,
         "mediana no": -0.1896,
         "mediana sí": 0.1102,
-        "p (Mann-Whitney)": 0.0,
+        "p (Mann-Whitney)": 1.3345617377890939e-15,
         "publicaciones": 1185.0
       }
     }
@@ -241,6 +291,80 @@
       "mouse": 94.52631578947368,
       "silla": 56.59574468085107,
       "teclado": 79.70588235294119
+    },
+    "comparacion_qcut_kmeans": {
+      "audifonos": {
+        "coincidencia_pct": 77.4947,
+        "kmeans_alta": 86,
+        "kmeans_económica": 198,
+        "kmeans_grupo_menor": 86,
+        "kmeans_media": 187,
+        "qcut_alta": 154,
+        "qcut_económica": 160,
+        "qcut_media": 157,
+        "silueta_kmeans": 0.5788,
+        "silueta_qcut": 0.4885
+      },
+      "laptop": {
+        "coincidencia_pct": 78.3158,
+        "kmeans_alta": 177,
+        "kmeans_económica": 75,
+        "kmeans_grupo_menor": 75,
+        "kmeans_media": 223,
+        "qcut_alta": 158,
+        "qcut_económica": 159,
+        "qcut_media": 158,
+        "silueta_kmeans": 0.5608,
+        "silueta_qcut": 0.5269
+      },
+      "monitor": {
+        "coincidencia_pct": 72.6708,
+        "kmeans_alta": 73,
+        "kmeans_económica": 205,
+        "kmeans_grupo_menor": 73,
+        "kmeans_media": 205,
+        "qcut_alta": 161,
+        "qcut_económica": 161,
+        "qcut_media": 161,
+        "silueta_kmeans": 0.5763,
+        "silueta_qcut": 0.4895
+      },
+      "mouse": {
+        "coincidencia_pct": 94.5263,
+        "kmeans_alta": 140,
+        "kmeans_económica": 167,
+        "kmeans_grupo_menor": 140,
+        "kmeans_media": 168,
+        "qcut_alta": 158,
+        "qcut_económica": 159,
+        "qcut_media": 158,
+        "silueta_kmeans": 0.6113,
+        "silueta_qcut": 0.5991
+      },
+      "silla": {
+        "coincidencia_pct": 56.5957,
+        "kmeans_alta": 19,
+        "kmeans_económica": 224,
+        "kmeans_grupo_menor": 19,
+        "kmeans_media": 227,
+        "qcut_alta": 157,
+        "qcut_económica": 158,
+        "qcut_media": 155,
+        "silueta_kmeans": 0.5606,
+        "silueta_qcut": 0.4186
+      },
+      "teclado": {
+        "coincidencia_pct": 79.7059,
+        "kmeans_alta": 93,
+        "kmeans_económica": 67,
+        "kmeans_grupo_menor": 67,
+        "kmeans_media": 180,
+        "qcut_alta": 113,
+        "qcut_económica": 116,
+        "qcut_media": 111,
+        "silueta_kmeans": 0.5591,
+        "silueta_qcut": 0.4263
+      }
     },
     "con_descuento": 1522,
     "descuento_inflado": 7,
@@ -429,7 +553,7 @@
         "mediana_sin": 309.0,
         "p_anuncio": 0.7016546183744324,
         "p_componente": 2.5637181827251055e-17,
-        "p_pagina": 2.2946185100032043e-13,
+        "p_pagina": 2.294618510003205e-13,
         "pct": 43.65
       },
       "vendedor": {
@@ -437,7 +561,7 @@
         "mediana_sin": 344.4,
         "p_anuncio": 0.5497784051294099,
         "p_componente": 9.24917565548085e-59,
-        "p_pagina": 0.026098876809134967,
+        "p_pagina": 0.02609887680913497,
         "pct": 56.35
       },
       "vendidos_min": {
@@ -473,15 +597,19 @@
       "pregunta": "¿El faltante se relaciona con el precio de la publicación?"
     },
     "f03_clave_de_union": {
-      "lectura": "Sí, y mucho: unir por código de catálogo encuentra 258 ofertas comunes y unir por oferta encuentra 767, 3.0 veces más. Con la clave de la Parte I, la mayoría de las ofertas repetidas entre capturas habría pasado como distinta.",
+      "lectura": "Sí, y mucho: unir por código de catálogo encuentra 258 ofertas comunes y unir por oferta encuentra 767, 3,0 veces más. Con la clave de la Parte I, la mayoría de las ofertas repetidas entre capturas habría pasado como distinta.",
       "pregunta": "¿Cambia el resultado de la integración según el identificador usado?"
     },
     "f03_variacion_precio": {
-      "lectura": "De 767 ofertas presentes en ambas capturas, 573 (75 %) mantuvieron exactamente el mismo precio. Entre las que cambiaron dominan las subidas: 105 subieron y 89 bajaron, con una variación mediana de +1.9 %. Un precio de referencia es estable en el corto plazo, pero conviene fecharlo.",
+      "lectura": "De 767 ofertas presentes en ambas capturas, 573 (75 %) mantuvieron exactamente el mismo precio. Entre las que cambiaron dominan las subidas: 105 subieron y 89 bajaron, con una variación mediana de +1,9 %. Un precio de referencia es estable en el corto plazo, pero conviene fecharlo.",
       "pregunta": "¿Cambian los precios de una misma oferta en dos días?"
     },
+    "f04_qcut_vs_kmeans": {
+      "lectura": "Ambos métodos coinciden entre 57 % y 95 % de las ofertas según el componente. K-Means separa mejor los grupos (silueta media 0,57 frente a 0,49), pero sus grupos quedan desbalanceados: su gama más pequeña tiene 19 ofertas en silla y 75 en laptop, mientras que con terciles ninguna gama baja de 111. Como el costo por perfil suma la mediana de la misma gama en seis componentes, se prefiere que cada gama signifique lo mismo en todos (el tercio más barato, el central y el más caro) y tenga ofertas suficientes: por eso se usa qcut.",
+      "pregunta": "¿Por qué segmentar las gamas con terciles y no con K-Means?"
+    },
     "f04_validacion_gamas": {
-      "lectura": "En parte, y cada componente de forma distinta. La RAM mediana de las laptops es 16, 16 y 32 GB en las gamas económica, media y alta: la memoria distingue a la gama alta. El monitor mediano mide 24, 27 y 27 pulgadas: el tamaño distingue a la gama económica. Las sillas ergonómicas pasan de 34 % a 57 %. En cambio, la proporción de periféricos inalámbricos apenas cambia (57–58 %): la conexión inalámbrica no es lo que encarece un teclado, un mouse o unos audífonos.",
+      "lectura": "En parte, y cada componente de forma distinta. La RAM mediana de las laptops es 16, 16 y 32 GB en las gamas económica, media y alta: la memoria distingue a la gama alta. El monitor mediano mide 24, 27 y 27 pulgadas: el tamaño distingue a la gama económica. Las sillas ergonómicas pasan de 34 % a 57 %. En cambio, la proporción de periféricos inalámbricos apenas cambia (57–58 %): la conexión inalámbrica no se asocia con una gama de precio mayor en estos datos.",
       "pregunta": "¿Las gamas definidas por precio corresponden a equipos distintos?"
     },
     "f05_composicion_perfiles": {
@@ -489,15 +617,15 @@
       "pregunta": "¿En qué componente se concentra el presupuesto?"
     },
     "f05_costo_perfiles": {
-      "lectura": "Un home office cuesta S/ 3 644 en gama económica, S/ 6 332 en gama media y S/ 12 323 en gama alta: el perfil alto cuesta 3.4 veces el económico. La cifra única de la Parte I (S/ 6 335) coincide con el perfil medio, pero oculta que el presupuesto real depende del nivel de equipamiento elegido.",
+      "lectura": "Un home office cuesta S/ 3 644 en gama económica, S/ 6 332 en gama media y S/ 12 323 en gama alta: el perfil alto cuesta 3,4 veces el económico. La cifra única de la Parte I (S/ 6 335) coincide con el perfil medio, pero oculta que el presupuesto real depende del nivel de equipamiento elegido.",
       "pregunta": "¿Cuánto cuesta equipar un home office según el nivel de equipamiento?"
     },
     "f05_cuotas": {
-      "lectura": "El 97.9 % de las publicaciones ofrece cuotas, todas sin interés y sobre todo en 6 (80 %) o 12 cuotas. Un perfil medio cuesta S/ 528 al mes en 12 cuotas sin recargo: financiar no encarece el equipo, solo reparte el gasto.",
+      "lectura": "El 97,9 % de las publicaciones ofrece cuotas, todas sin interés y sobre todo en 6 (80 %) o 12 cuotas. Un perfil medio cuesta S/ 528 al mes en 12 cuotas sin recargo: financiar no encarece el equipo, solo reparte el gasto.",
       "pregunta": "¿Cuánto se paga al mes si se financia el home office?"
     },
     "f05_gamer": {
-      "lectura": "Depende del componente. \"Gamer\" encarece laptop, teclado, mouse y audífonos (el mouse gamer está 0.71 desviaciones por encima del resto), pero no monitor ni silla: ahí los productos gamer son incluso más baratos que el resto. Para un home office, un mouse o una laptop gamer agregan costo por prestaciones que el trabajo de oficina no necesita.",
+      "lectura": "Depende del componente. Lo \"gamer\" tiene precio mediano más alto en laptop, teclado, mouse y audífonos y más bajo en monitor y silla, pero la diferencia solo es significativa (Mann-Whitney, p < 0,05) en laptop y mouse: el mouse gamer está 0,71 desviaciones por encima del resto y la laptop gamer 0,47. En los demás componentes la etiqueta no cambia el precio de forma sistemática. Para un home office, un mouse o una laptop gamer agregan costo por prestaciones que el trabajo de oficina no necesita.",
       "pregunta": "¿Cuesta más un equipo con la etiqueta \"gamer\"?"
     },
     "f05_laptops": {
@@ -505,15 +633,15 @@
       "pregunta": "¿Qué explica el precio de una laptop?"
     },
     "f05_precio_por_gama": {
-      "lectura": "Las gamas no se superponen por construcción, pero la distancia entre ellas varía mucho: la laptop de gama alta cuesta 3.0 veces la económica, y el mayor salto relativo está en mouse (8.6 veces). La mediana de cada gama es la referencia que se suma en los perfiles.",
+      "lectura": "Las gamas no se superponen por construcción, pero la distancia entre ellas varía mucho: la laptop de gama alta cuesta 3,0 veces la económica, y el mayor salto relativo está en mouse (8,6 veces). La mediana de cada gama es la referencia que se suma en los perfiles.",
       "pregunta": "¿Cuánto se separan los precios entre gamas dentro de cada componente?"
     },
     "f05_promociones": {
-      "lectura": "No. Entre 41 % y 65 % de las publicaciones anuncian una promoción, con descuentos medianos de hasta 45 % (sillas). Pero en 4 de 6 componentes el precio final de las ofertas con descuento es mayor que el de las que no tienen promoción (Mann-Whitney, p = 0.0008). El porcentaje de descuento no indica un buen precio: hay que comparar el precio final.",
+      "lectura": "No. Entre 41 % y 65 % de las publicaciones anuncian una promoción, con descuentos medianos de hasta 45 % (sillas). En conjunto, las ofertas con descuento tienen un precio relativo mediano de -0,01 frente a -0,12 sin promoción: son algo más caras (Mann-Whitney, p < 0,001). Por componente, la diferencia es significativa en laptop, mouse y audífonos (más caras con promoción) y en silla (más baratas); en monitor y teclado no hay diferencia. El porcentaje de descuento no indica un buen precio: hay que comparar el precio final.",
       "pregunta": "¿Las publicaciones con descuento son más baratas?"
     },
     "f05_reputacion": {
-      "lectura": "Van en sentidos opuestos. La relación entre ventas y precio es débil en general (Spearman ρ = -0.08, p = 0.014), pero marcada en el extremo: las publicaciones con +1000 vendidos tienen un precio relativo mediano de -0.49, más baratas que su componente. En cambio, las mejor calificadas son más caras (ρ = 0.24, p < 0,001). Lo más vendido no es lo mejor valorado. Recordatorio: solo 36 % de las publicaciones muestra reseñas, y faltan más en los productos caros (notebook 02).",
+      "lectura": "Van en sentidos opuestos. La relación entre ventas y precio es débil en general (Spearman ρ = -0,08, p = 0,014), pero marcada en el extremo: las publicaciones con +1000 vendidos tienen un precio relativo mediano de -0,49, más baratas que su componente. En cambio, las mejor calificadas son más caras (ρ = 0,24, p < 0,001). Lo más vendido no es lo mejor valorado. Recordatorio: solo 36 % de las publicaciones muestra reseñas, y faltan más en los productos caros (notebook 02).",
       "pregunta": "¿Cómo se relacionan popularidad, calificación y precio?"
     }
   },
@@ -539,7 +667,7 @@
       },
       {
         "accion": "Comparar el precio final entre publicaciones del mismo componente y gama, no el porcentaje de descuento.",
-        "cifra": "4 de 6 componentes con precio relativo mayor con promoción; p = 0.0008",
+        "cifra": "precio relativo mediano -0,01 con promoción frente a -0,12 sin ella; Mann-Whitney, p < 0,001",
         "hallazgo": "Un descuento anunciado no garantiza un buen precio: las ofertas con promoción no son más baratas que las demás de su componente.",
         "usuario": "Trabajador o estudiante"
       },
@@ -557,14 +685,14 @@
       },
       {
         "accion": "Para trabajo de oficina, evitar mouse y laptops gamer: pagan prestaciones que no se usan.",
-        "cifra": "mouse gamer: +0.71 desviaciones sobre el resto",
-        "hallazgo": "La etiqueta \"gamer\" encarece laptop, teclado, mouse y audífonos.",
+        "cifra": "mouse gamer: +0,71 desviaciones sobre el resto",
+        "hallazgo": "La etiqueta \"gamer\" encarece de forma significativa laptop y mouse; en los demás componentes no cambia el precio de forma sistemática.",
         "usuario": "Trabajador o estudiante"
       },
       {
         "accion": "No descartar los anuncios al comparar: suelen estar entre las opciones más baratas de su componente.",
-        "cifra": "p = 1.8e-05",
-        "hallazgo": "Los anuncios patrocinados no son más caros: su precio relativo mediano es -0.49 frente a -0.04 de los resultados orgánicos.",
+        "cifra": "Mann-Whitney, p < 0,001",
+        "hallazgo": "Los anuncios patrocinados no son más caros: su precio relativo mediano es -0,49 frente a -0,04 de los resultados orgánicos.",
         "usuario": "Trabajador o estudiante"
       },
       {

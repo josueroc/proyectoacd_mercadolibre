@@ -19,9 +19,12 @@ el nivel de equipamiento:
 | Alto | S/ 12 323 | S/ 10 464 – S/ 16 239 |
 
 - La laptop concentra entre el 67 % y el 77 % del costo de cada perfil.
-- Las ofertas con descuento no son más baratas que las demás de su componente (Mann-Whitney, p = 0,0008).
+- Las ofertas con descuento no son más baratas: en conjunto son algo más caras que las demás de su componente
+  (Mann-Whitney, p < 0,001).
 - El 98 % de las ofertas tiene cuotas sin interés: financiar no encarece.
-- La etiqueta "gamer" encarece laptops y periféricos, pero no monitores ni sillas.
+- La etiqueta "gamer" encarece de forma significativa solo laptops y mouse.
+- Las gamas se definen por terciles (`qcut`) y no por K-Means: K-Means separa mejor, pero deja grupos de hasta 19
+  ofertas y gamas que no significan lo mismo en cada componente (notebook 04).
 
 La Parte I había estimado una sola cifra, S/ 6 335,44 (suma de medianas). La Parte II muestra que esa cifra coincide
 con el perfil medio, pero oculta una diferencia de 3,4 veces entre el perfil económico y el alto.
@@ -52,7 +55,8 @@ notebooks/
   comun.py                                 rutas, estilo de figuras, evidencia y balance
   ACD_Proyecto_Parte_I.ipynb, generar_figuras*.ipynb   Parte I
 pipeline.py                                orquestador del pipeline de la Parte II
-scripts/                                   generadores de diccionarios, informe y presentación
+scripts/                                   generadores de diccionarios e informe (Python) y exportación a PDF
+scripts/presentacion/                      generador de la presentación (Node.js)
 docs/
   diccionarios/                            diccionarios inicial (categorías y home office) y final, .docx y PDF
   parte_2/informe/                         documento maestro de la Parte II, .docx y PDF
@@ -95,11 +99,14 @@ registros roto, nulos fuera de lo justificado), el pipeline se detiene, nombra e
 ```bash
 python scripts/generar_diccionarios.py
 python scripts/generar_informe.py
-python scripts/generar_presentacion.py
+cd scripts/presentacion && npm install && node generar_presentacion.js
 ```
 
-La exportación a PDF y la numeración del índice del informe usan Microsoft Word y PowerPoint; sin ellos se generan
-igual los `.docx` y `.pptx`.
+La exportación a PDF y la numeración del índice del informe usan Microsoft Word o, si no está instalado,
+LibreOffice (se busca `soffice` en el PATH o en la variable de entorno `SOFFICE`). La presentación necesita
+Node.js 18 o superior; sus gráficos son nativos de PowerPoint y cada diapositiva lleva notas para quien la
+presenta. Usa las fuentes Bahnschrift y Segoe UI, incluidas en Windows. Las fotografías son de Unsplash
+(`docs/parte_2/presentacion/imagenes/CREDITOS.md`).
 
 **Parte I.** `notebooks/ACD_Proyecto_Parte_I.ipynb` extrae y limpia el dataset de categorías. Con
 `EJECUTAR_SCRAPER = False` trabaja sobre el CSV crudo del repositorio en segundos; con `True` repite la captura
@@ -115,7 +122,7 @@ igual los `.docx` y `.pptx`.
 | Carpeta `notebooks` con nombres descriptivos | `notebooks/01_…` a `05_…` |
 | Carpeta `docs` con diccionario inicial y final | `docs/diccionarios/` |
 | Data assets: dataset final (CSV) y diccionario final (PDF) | `data/final/homeoffice_final.csv`, `docs/diccionarios/diccionario_final.pdf` |
-| Documento de presentación | `docs/parte_2/presentacion/Presentacion_Parte_II_DS3021.pptx` |
+| Documento de presentación | `docs/parte_2/presentacion/Presentacion_Parte_II_DS3021.pptx` (y su PDF) |
 
 ## Correspondencia con el contenido del informe
 

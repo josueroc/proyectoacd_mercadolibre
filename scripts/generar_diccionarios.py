@@ -4,7 +4,7 @@
 - docs/diccionarios/diccionario_final: las columnas de data/final/homeoffice_final.csv.
 
 Tamaño máximo y valores se calculan con los datos; descripción, tipo y unidad están definidos abajo.
-Uso: python scripts/generar_diccionarios.py   (la exportación a PDF requiere Microsoft Word)
+Uso: python scripts/generar_diccionarios.py   (la exportación a PDF usa Microsoft Word o LibreOffice)
 """
 import copy
 import json
@@ -216,23 +216,12 @@ def generar(datos, definiciones, titulo, descripcion, notas, destino):
 
 
 def exportar_pdf(rutas):
-    try:
-        import win32com.client
-    except ImportError:
-        print('Sin Microsoft Word (pywin32): se omite la exportación a PDF.')
-        return
-    word = win32com.client.DispatchEx('Word.Application')
-    word.Visible, word.DisplayAlerts = False, 0
-    try:
-        for ruta in rutas:
-            documento = word.Documents.Open(str(ruta.resolve()))
-            try:
-                documento.SaveAs2(str(ruta.with_suffix('.pdf').resolve()), FileFormat=17)
-            finally:
-                documento.Close(SaveChanges=0)
-            print(f'{ruta.with_suffix(".pdf").relative_to(RAIZ)}')
-    finally:
-        word.Quit(SaveChanges=0)
+    """Exporta cada diccionario a PDF con Word o, si no está instalado, con LibreOffice."""
+    from exportar import a_pdf
+    for ruta in rutas:
+        pdf = a_pdf(ruta)
+        if pdf is not None:
+            print(pdf.relative_to(RAIZ))
 
 
 def main():

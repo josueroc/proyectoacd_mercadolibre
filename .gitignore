@@ -225,3 +225,7 @@ data/calidad/duplicados_detectados.csv
 
 # Material de clase de consulta local (no se versiona)
 material-clase-2da-parte/
+
+# Dependencias del generador de la presentación
+node_modules/
+scripts/presentacion/package-lock.json

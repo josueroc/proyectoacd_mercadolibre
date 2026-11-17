@@ -15,6 +15,6 @@ scikit-learn>=1.3
 notebook
 nbconvert>=7.0
 
-# Documentos de entrega (informe, diccionarios y presentación)
+# Documentos de entrega (informe y diccionarios; la presentación usa Node.js)
 python-docx>=1.1
-python-pptx>=1.0
+pypdf>=4.0

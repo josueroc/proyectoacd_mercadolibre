@@ -5,6 +5,7 @@ datos: cada decisión de preprocesamiento vive, explicada, en su notebook.
 """
 import json
 import os
+import re
 import time
 from pathlib import Path
 
@@ -99,6 +100,16 @@ def soles(valor, decimales=0):
     return f'S/ {texto}'
 
 
+def formato_p(p):
+    """Valor p para el texto: 'p < 0,001' o 'p = 0,014'."""
+    return 'p < 0,001' if p < 0.001 else f'p = {p:.3f}'.replace('.', ',')
+
+
+def coma_decimal(texto):
+    """Usa coma decimal en los textos del informe: 3.4 -> 3,4 (no toca números sin parte decimal)."""
+    return re.sub(r'(?<=\d)\.(?=\d)', ',', texto)
+
+
 # ---------------------------------------------------------------- escritura determinista
 def escribir_csv(df, ruta):
     """CSV en UTF-8, sin índice, con fin de línea y formato de fecha fijos (NFR-002)."""
@@ -154,6 +165,7 @@ def registrar_balance(etapa, entrada, salida, **excluidos):
 def guardar_figura(fig, nombre, pregunta, lectura):
     """Guarda la figura y registra la pregunta que responde y su lectura analítica (constitución VI)."""
     assert pregunta.strip() and lectura.strip(), 'Cada figura necesita su pregunta y su interpretación.'
+    lectura = coma_decimal(lectura)
     # Windows puede bloquear un instante el PNG recién escrito (antivirus, indexador): se reintenta brevemente.
     for intento in range(5):
         try:

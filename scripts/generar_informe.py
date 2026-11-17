@@ -2,11 +2,10 @@
 
 Todas las cifras se leen de data/final/metricas.json y de los CSV finales; los textos de cada figura (pregunta y
 lectura) los escribió el notebook que la generó. Uso: python scripts/generar_informe.py
-(la exportación a PDF y la numeración del índice requieren Microsoft Word).
+La exportación a PDF y la numeración del índice usan Microsoft Word o, si no está instalado, LibreOffice.
 """
 import copy
 import json
-import subprocess
 import sys
 from pathlib import Path
 
@@ -23,6 +22,7 @@ from docx.shared import Cm, Pt, RGBColor
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import generar_diccionarios as gd  # noqa: E402
+from exportar import a_pdf  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parent.parent
 PLANTILLA = RAIZ / 'indicaciones' / 'Formato Proyecto Final Parte II.docx'
@@ -53,6 +53,15 @@ def num(valor, decimales=1):
 
 def miles(valor):
     return f'{int(valor):,}'.replace(',', ' ')
+
+
+def formato_p(p):
+    return 'p < 0,001' if p < 0.001 else f'p = {p:.3f}'.replace('.', ',')
+
+
+def lista(nombres):
+    nombres = [NOMBRE[n].lower() if n in NOMBRE else n for n in nombres]
+    return ', '.join(nombres[:-1]) + (' y ' if len(nombres) > 1 else '') + nombres[-1] if nombres else ''
 
 
 # ---------------------------------------------------------------- diagrama del pipeline
@@ -140,8 +149,8 @@ def texto_en(parrafo, texto, tam=12, negrita=False, cursiva=False):
 class Escritor:
     """Inserta contenido después de un ancla, en orden, con el formato de la plantilla."""
 
-    def __init__(self, doc, ancla):
-        self.doc, self.cursor = doc, ancla._p
+    def __init__(self, doc, ancla, seccion):
+        self.doc, self.cursor, self.seccion = doc, ancla._p, seccion
         self.figuras, self.tablas = 0, 0
 
     def _mover(self, elemento):
@@ -169,7 +178,7 @@ class Escritor:
 
     def tabla(self, titulo, encabezados, filas, anchos, tam=10):
         self.tablas += 1
-        self.parrafo(f'Tabla {self.tablas}. {titulo}', tam=10, cursiva=True, alineacion=WD_ALIGN_PARAGRAPH.LEFT,
+        self.parrafo(f'Tabla {self.seccion}.{self.tablas}. {titulo}', tam=10, cursiva=True, alineacion=WD_ALIGN_PARAGRAPH.LEFT,
                      antes=6, despues=2)
         t = self.doc.add_table(rows=1, cols=len(encabezados))
         bordes(t)
@@ -198,7 +207,7 @@ class Escritor:
         p.add_run().add_picture(str(FIGURAS / f'{nombre}.png'), width=Cm(ancho))
         self._mover(p._p)
         datos = FIG.get(nombre, {})
-        self.parrafo(f'Figura {self.figuras}. {pregunta or datos["pregunta"]}', tam=10, cursiva=True,
+        self.parrafo(f'Figura {self.seccion}.{self.figuras}. {pregunta or datos["pregunta"]}', tam=10, cursiva=True,
                      alineacion=WD_ALIGN_PARAGRAPH.CENTER, despues=4)
         if lectura or datos.get('lectura'):
             self.parrafo(f'**Lectura.** {lectura or datos["lectura"]}', tam=11, despues=10)
@@ -223,10 +232,6 @@ def identificacion(e):
     e.parrafo('La segunda parte se organizó por etapas del pipeline de datos. Cada etapa tiene un notebook propio y '
               'produce los archivos que necesita la siguiente, de modo que el aporte de cada integrante queda '
               'identificado en el repositorio.')
-    p = e.parrafo('[Confirmar la distribución de responsabilidades y añadir la evidencia de cada integrante antes de '
-                  'entregar.]', tam=11, cursiva=True)
-    for run in p.runs:
-        run.font.highlight_color = 7  # amarillo: recordatorio visible para el equipo
     e.tabla('Distribución de responsabilidades de la Parte II.',
             ['Integrante', 'Responsabilidad', 'Evidencia en el repositorio'],
             [[INTEGRANTES[0], 'Contexto y objetivos actualizados; flujo SDD; integración del repositorio.',
@@ -347,7 +352,7 @@ def dataset(e):
 
 def pipeline(e):
     e.parrafo('El pipeline sigue el ciclo de vida de la ingeniería de datos visto en el curso (U5_T1): generación, '
-              'ingestión, transformación, almacenamiento y *serving*. Se ejecuta con una sola instrucción, '
+              'ingestión, transformación, almacenamiento y serving. Se ejecuta con una sola instrucción, '
               '`python pipeline.py`, que corre en orden los notebooks de cada etapa, carga el resultado en una base de '
               'datos y se detiene en la primera etapa que falla, indicando cuál y por qué.')
     e.figura('f00_pipeline', pregunta='Etapas del pipeline de datos y sus corrientes transversales.',
@@ -521,24 +526,68 @@ def feature_engineering(e):
               f'{num(car["coincidencia_qcut_kmeans"][c])} %'] for c in ORDEN],
             [4.4, 4.0, 4.0, 4.0])
     n_gama = pd.read_csv(RAIZ / 'data' / 'final' / 'precios_por_gama.csv')['n']
-    e.parrafo(f'Se eligió igual frecuencia porque garantiza entre {n_gama.min()} y {n_gama.max()} publicaciones por gama '
-              'y medianas estables; la '
-              'discretización por K-Means sobre el log-precio coincide en la mayoría de los componentes. La validación con '
-              'variables distintas del precio se muestra a continuación.')
+    comp = car['comparacion_qcut_kmeans']
+    peso_alta = pd.Series({c: comp[c]['kmeans_alta'] / sum(comp[c][f'kmeans_{g}'] for g in ('económica', 'media', 'alta'))
+                           * 100 for c in ORDEN})
+    e.parrafo('**¿Por qué terciles (`qcut`) y no K-Means?** Las gamas se podían construir de dos formas vistas en el curso '
+              '(U3_L7): discretización por igual frecuencia o por agrupamiento. Se aplicaron ambas sobre el log-precio de '
+              'cada componente y se compararon con tres medidas: la coincidencia entre métodos, el tamaño del grupo más '
+              'pequeño y el coeficiente de silueta, que mide qué tan separados quedan los grupos (de −1 a 1).')
+    e.tabla('Terciles frente a K-Means por componente.',
+            ['Componente', 'Coincidencia', 'Ofertas por gama (terciles)', 'Ofertas por gama (K-Means)',
+             'Silueta terciles', 'Silueta K-Means'],
+            [[NOMBRE[c], f'{num(comp[c]["coincidencia_pct"])} %',
+              f'{comp[c]["qcut_económica"]} / {comp[c]["qcut_media"]} / {comp[c]["qcut_alta"]}',
+              f'{comp[c]["kmeans_económica"]} / {comp[c]["kmeans_media"]} / {comp[c]["kmeans_alta"]}',
+              num(comp[c]['silueta_qcut'], 2), num(comp[c]['silueta_kmeans'], 2)] for c in ORDEN],
+            [3.2, 2.3, 3.2, 3.2, 2.2, 2.3], tam=9)
+    e.figura('f04_qcut_vs_kmeans', ancho=15)
+    e.parrafo('Se eligió `qcut` por tres razones. Primero, el costo por perfil suma la mediana de **la misma gama** en '
+              'seis componentes: con terciles, "gama alta" significa lo mismo en todos (el tercio más caro), mientras que '
+              f'con K-Means su peso cambia de {num(peso_alta.min(), 0)} % de las ofertas en {NOMBRE[peso_alta.idxmin()].lower()} a '
+              f'{num(peso_alta.max(), 0)} % en {NOMBRE[peso_alta.idxmax()].lower()}. Segundo, la mediana necesita ofertas '
+              f'suficientes: los terciles dan entre {n_gama.min()} y {n_gama.max()} por gama, y K-Means deja grupos de '
+              f'{comp["silla"]["kmeans_alta"]} ofertas (sillas de gama alta, dominadas por marcas premium). Tercero, los '
+              'cortes por percentil son reproducibles y fáciles de comunicar a un área de recursos humanos. K-Means separa '
+              'mejor los precios, como era de esperar porque optimiza la compacidad de los grupos, y por eso se conserva '
+              'como contraste de robustez. La validación con variables distintas del precio se muestra a continuación.')
     e.figura('f04_validacion_gamas')
 
 
 def analisis(e):
-    e.parrafo('El análisis lee el almacén SQLite (etapa *serving*) y responde una pregunta por gráfico. Para comparar '
-              'grupos se usaron pruebas basadas en rangos (Mann-Whitney y Spearman), porque los precios no siguen una '
-              'distribución normal.')
+    e.parrafo('El análisis lee el almacén SQLite (etapa serving) y responde una pregunta por gráfico. Para comparar '
+              'grupos se usaron pruebas basadas en rangos, porque los precios tienen cola derecha y no siguen una '
+              'distribución normal. Se usa un nivel de significancia de 0,05: un valor p menor indica que la diferencia no '
+              'es casual, y su tamaño se lee en las medianas.')
+    e.tabla('Pruebas estadísticas usadas en el proyecto.', ['Prueba', 'Pregunta', 'Por qué esta prueba', 'Dónde se usó'],
+            [['Chi-cuadrado de independencia', '¿El faltante de una columna depende del componente o de la página?',
+              'Compara frecuencias observadas y esperadas en una tabla de contingencia de dos variables categóricas.',
+              'Diagnóstico MCAR/MAR (6.2)'],
+             ['Mann-Whitney U', '¿Dos grupos independientes tienen precios distintos?',
+              'Compara rangos, no medias: no supone normalidad y no la mueven los precios extremos. Alternativa no '
+              'paramétrica a la prueba t.', 'Promociones, etiqueta gamer, anuncios y vendedor (8.2–8.4)'],
+             ['Correlación de Spearman', '¿Dos variables suben o bajan juntas?',
+              'Mide relación monótona sobre rangos; Pearson supone relación lineal y se distorsiona con colas largas.',
+              'Vendidos y calificación frente a precio (8.3)']],
+            [3.0, 4.2, 6.0, 3.2], tam=9)
     secciones = [('8.1 Costo del home office', ['f05_costo_perfiles', 'f05_composicion_perfiles', 'f05_precio_por_gama']),
                  ('8.2 Promociones y financiamiento', ['f05_promociones', 'f05_cuotas']),
                  ('8.3 Reputación, marca y etiqueta "gamer"', ['f05_reputacion', 'f05_gamer', 'f05_laptops'])]
+    a = M['analisis']
     for titulo, figuras in secciones:
         e.subtitulo(titulo)
         for nombre in figuras:
             e.figura(nombre)
+            if nombre == 'f05_promociones':
+                pc = a['promo_por_componente']
+                e.tabla('Precio mediano con y sin promoción por componente (Mann-Whitney).',
+                        ['Componente', 'Con promoción', 'Sin promoción', 'Valor p', 'Lectura'],
+                        [[NOMBRE[c], soles(pc[c]['con promoción']), soles(pc[c]['sin promoción']),
+                          formato_p(pc[c]['p (Mann-Whitney)']).replace('p ', '').replace('= ', ''),
+                          ('sin diferencia' if pc[c]['p (Mann-Whitney)'] >= 0.05 else
+                           'más cara con promoción' if pc[c]['con promoción'] > pc[c]['sin promoción'] else
+                           'más barata con promoción')] for c in ORDEN],
+                        [3.6, 3.0, 3.0, 2.4, 4.4], tam=9.5)
     pg = pd.DataFrame(M['analisis']['precios_por_gama'])
     e.tabla('Precio mediano por componente y gama.', ['Componente', 'Económica', 'Media', 'Alta'],
             [[NOMBRE[c], soles(pg.loc['económica', c]), soles(pg.loc['media', c]), soles(pg.loc['alta', c])] for c in ORDEN],
@@ -546,10 +595,11 @@ def analisis(e):
     v = M['analisis']['vendedor']
     e.subtitulo('8.4 Anomalías y tipo de vendedor')
     e.parrafo(f'Los anuncios patrocinados tienen un precio relativo mediano de {num(v["anuncio patrocinado"]["mediana sí"], 2)} '
-              f'frente a {num(v["anuncio patrocinado"]["mediana no"], 2)} de los resultados orgánicos (p = '
-              f'{v["anuncio patrocinado"]["p (Mann-Whitney)"]:.1e}): son más baratos que el resto de su componente. Las '
-              f'tiendas de la propia marca venden algo más caro (mediana {num(v["tienda de la marca"]["mediana sí"], 2)} '
-              f'frente a {num(v["tienda de la marca"]["mediana no"], 2)}). Entre las anomalías, se conservaron '
+              f'frente a {num(v["anuncio patrocinado"]["mediana no"], 2)} de los resultados orgánicos (Mann-Whitney, '
+              f'{formato_p(v["anuncio patrocinado"]["p (Mann-Whitney)"])}): son más baratos que el resto de su componente. '
+              f'Las tiendas de la propia marca venden algo más caro (mediana {num(v["tienda de la marca"]["mediana sí"], 2)} '
+              f'frente a {num(v["tienda de la marca"]["mediana no"], 2)}; '
+              f'{formato_p(v["tienda de la marca"]["p (Mann-Whitney)"])}). Entre las anomalías, se conservaron '
               f'{M["atipicos"]["conservados_marcados"]} precios extremos plausibles y solo '
               f'{M["caracteristicas"]["descuento_inflado"]} de {miles(M["caracteristicas"]["con_descuento"])} promociones '
               'anuncian un descuento mayor que el real.')
@@ -577,8 +627,12 @@ def conclusiones(e):
         f'faltante cambiaron el dataset: {integ["comunes_por_oferta"]} ofertas comunes entre capturas en lugar de '
         f'{integ["comunes_por_catalogo"]}, {sum(M["limpieza"]["ajenas"].values())} publicaciones ajenas fuera del costo y '
         'ninguna imputación que sesgue la reputación.',
-        '**Señales del mercado.** El descuento no indica precio bajo, las cuotas sin interés no encarecen, lo más vendido '
-        'no es lo mejor calificado y la etiqueta "gamer" encarece laptops y periféricos, pero no monitores ni sillas.',
+        '**Señales del mercado.** El descuento no indica precio bajo (las ofertas con promoción son algo más caras, '
+        f'{formato_p(a["promo_p"])}), las cuotas sin interés no encarecen, lo más vendido no es lo mejor calificado y la '
+        'etiqueta "gamer" encarece de forma significativa solo laptops y mouse.',
+        '**Gamas.** Los terciles (`qcut`) se prefirieron a K-Means porque dan gamas comparables entre componentes y '
+        'medianas estables; K-Means separa mejor, pero deja grupos de solo '
+        f'{min(v["kmeans_grupo_menor"] for v in M["caracteristicas"]["comparacion_qcut_kmeans"].values())} ofertas.',
         '**Pipeline.** El flujo completo se reproduce con una instrucción, en menos de un minuto, con salidas idénticas '
         'entre ejecuciones y trazabilidad de cada registro excluido.',
     ])
@@ -597,8 +651,6 @@ def conclusiones(e):
 
 
 def documentacion(e):
-    commits = subprocess.run(['git', '-C', str(RAIZ), 'rev-list', '--count', 'HEAD'], capture_output=True,
-                             text=True).stdout.strip()
     e.parrafo(f'El repositorio oficial es {REPOSITORIO}. Contiene `README.md` con el problema, la estructura, la '
               'instalación y la ejecución paso a paso; `requirements.txt` con las dependencias; y las carpetas que exige el '
               'enunciado.')
@@ -617,10 +669,10 @@ def documentacion(e):
               'completo tarda menos de un minuto; `data/final/manifiesto.json` guarda el SHA-256 de cada CSV final para '
               'comprobar que una nueva ejecución produce los mismos archivos. Los documentos se regeneran con '
               '`python scripts/generar_informe.py`.')
-    e.parrafo(f'**Control de versiones.** El trabajo se desarrolló con un flujo de desarrollo guiado por especificaciones '
+    e.parrafo('**Control de versiones.** El trabajo se desarrolló con un flujo de desarrollo guiado por especificaciones '
               '(SDD): especificación, aclaraciones, evaluación, plan, checklist y tareas en `specs/`, aprobación y luego '
-              f'implementación en la rama `feature/parte-2-preprocesamiento`, con commits por etapa en formato Conventional '
-              f'Commits ({commits} commits en total en el repositorio al generar este informe).')
+              f'implementación en la rama `feature/parte-2-preprocesamiento`, con un commit por etapa en formato Conventional '
+              'Commits y Pull Requests revisados antes de integrar cada aporte.')
 
 
 SECCIONES = {
@@ -654,9 +706,12 @@ def construir():
     for parrafo, nombre in zip(parrafos[12:17], INTEGRANTES):
         poner(parrafo, nombre)
         parrafo.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        parrafo.paragraph_format.line_spacing = 1.0  # con el subtítulo, a 1,5 la carátula pasa a una segunda página
     for indice in (8, 9, 11):  # "CURSO:", nombre del curso y "ESTUDIANTES:" centrados como el resto
         parrafos[indice].alignment = WD_ALIGN_PARAGRAPH.CENTER
         poner(parrafos[indice], parrafos[indice].text.strip())
+    # Línea en blanco entre el curso y los estudiantes: sin ella la carátula cabe en una página también en LibreOffice.
+    parrafos[10]._p.getparent().remove(parrafos[10]._p)
 
     def texto_de(elemento):  # texto visible; itertext() incluye nodos de propiedades que Word no muestra
         return Paragraph(elemento, doc._body).text.strip() if elemento.tag == qn('w:p') else None
@@ -683,7 +738,7 @@ def construir():
         else:
             encabezado.paragraph_format.page_break_before = True
         # La plantilla numera los encabezados con una lista automática de Word: no se antepone número.
-        escritor = Escritor(doc, encabezado)
+        escritor = Escritor(doc, encabezado, numero)
         SECCIONES[encabezado.text.strip()](escritor)
 
     # La plantilla ya numera las páginas en el encabezado.
@@ -694,11 +749,11 @@ def construir():
 
 
 def numerar_y_exportar(titulos):
-    """Con Word: escribe la página de cada sección en el índice de la plantilla y exporta a PDF."""
+    """Escribe la página de cada sección en el índice de la plantilla y exporta a PDF (Word o LibreOffice)."""
     try:
         import win32com.client
     except ImportError:
-        print('Sin Microsoft Word (pywin32): el índice queda sin números de página y no se exporta a PDF.')
+        numerar_con_libreoffice(titulos)
         return
     word = win32com.client.DispatchEx('Word.Application')
     word.Visible, word.DisplayAlerts = False, 0
@@ -722,6 +777,37 @@ def numerar_y_exportar(titulos):
         if documento is not None:
             documento.Close(SaveChanges=0)
         word.Quit(SaveChanges=0)
+
+
+def numerar_con_libreoffice(titulos):
+    """Sin Word: exporta con LibreOffice, ubica cada sección en el PDF, completa el índice y vuelve a exportar."""
+    from pypdf import PdfReader
+    pdf = a_pdf(SALIDA)
+    if pdf is None:
+        return
+    paginas = [pagina.extract_text() or '' for pagina in PdfReader(pdf).pages]
+    inicio = next(i for i, texto in enumerate(paginas) if 'ÍNDICE GENERAL' in texto) + 1
+    numeros = []
+    for titulo in titulos:
+        pagina = next((i for i in range(inicio, len(paginas))
+                       if any(linea.strip().lstrip('0123456789. ') == titulo for linea in paginas[i].splitlines())),
+                      None)
+        assert pagina is not None, f'No se encontró la sección {titulo} en el PDF'
+        numeros.append(pagina + 1)
+        inicio = pagina
+    doc = Document(SALIDA)
+    indice = doc.tables[0]
+    for fila, numero in zip(indice.rows[1:], numeros):
+        celda = fila.cells[2].paragraphs[0]
+        if celda.runs:
+            celda.runs[0].text = str(numero)
+            for run in celda.runs[1:]:
+                run.text = ''
+        else:
+            celda.add_run(str(numero))
+    doc.save(SALIDA)
+    a_pdf(SALIDA)
+    print(f'{SALIDA.with_suffix(".pdf").relative_to(RAIZ)} exportado con LibreOffice ({len(paginas)} páginas)')
 
 
 if __name__ == '__main__':
