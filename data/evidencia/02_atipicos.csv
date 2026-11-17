@@ -1,0 +1,52 @@
+etapa,motivo,id_oferta,componente,titulo,precio,descuento_pct,criterios,decision
+02,atípico detectado,MPE1029304162,monitor,Monitor Benq Pd2730s Para Diseño 27 Pulg 5k 218 Ppi 2000:1,6499.0,0.0,"iqr, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE1030058016,laptop,MacBook Air MacBoor Air - 2017 - Excelente (Reacondicionado),880.0,0.0,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE1069045034,silla,Silla Ejecutiva Sihoo S300l De Cuero Marrón Con Reposapies Marrón Cuero,3733.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1070670532,silla,"Silla De Oficina Steelcase Serie 1 Ergonómica, Grafito, con Ruedas para Piso Duro",7769.0,0.0,"iqr, z",conservar: extremo plausible
+02,atípico detectado,MPE1070670736,silla,Silla De Oficina Serie 2 Silla De Trabajo Ergonómica,9929.0,0.0,"iqr, z, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE1070670800,silla,"Silla De Oficina Ejecutiva De Respaldo Alto, Silla Ergonóm. Color Negro",4909.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1070696532,silla,Silla de Oficina Colamy Ergonómica con Apoyabrazos Abatibles y Ruedas para Escritorio,5149.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1070696686,silla,Capot Silla De Oficina Ergonómica De Malla Silla De,5879.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1078002142,teclado,"Mini Teclado Inalámbrico Ivarma Iluminado Touchpad Para Smart TV, PC, Xbox",20.81,50.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1078028152,teclado,Mini Teclado Inalámbrico Daza Touchpad Retroiluminado Azul QWERTY Negro,20.81,50.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1078041130,teclado,"Mini Teclado Inalámbrico Ivarma Iluminado Touchpad Para Smart TV, PC, Xbox",20.81,50.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1078557078,monitor,Monitor Samsung 55 Gaming Odyssey Ark Black Ls55cg97wnlxpe,5249.0,44.33,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE1080167828,teclado,Teclado Inalámbrico Retroiluminado USB-C Mini Keyboard con Touchpad,17.0,56.41,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1081323192,laptop,Laptop Mlogix Ml3-146 Intel Celeron J4025 8gb Ram 128g Ssd,1045.0,47.72,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE1082511084,audifonos,Apple AirPods Max - Blanco estelar,2799.0,0.0,"iqr, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE1083905520,silla,Steelcase Leap Silla Ergonomica De Oficina Modelo 46216179s,45499.0,0.0,"iqr, z, kmeans, mahalanobis",conservar: extremo plausible
+02,atípico detectado,MPE1083918530,silla,Holludle Silla Ergonómica Vchair-gr Malla Soporte Lumbar 3d,6019.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1087947888,teclado,Teclado Mecánico Galleon 100 Sd Con Stream Deck,1649.0,25.01,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE1093781528,mouse,Mouse Óptico Teros TE-1226S 800-1600 DPI USB 4 Botones Rosado,8.32,71.31,"kmeans, mahalanobis",conservar: extremo plausible
+02,atípico detectado,MPE1093875680,mouse,"Mouse Pro X Superlight 2 - Sensor Hero 2 - 32,000 Dpi Usb-c Color Blanco",459.0,42.55,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE1094595734,teclado,Mini Teclado Inalámbrico Touchpad Smart Tv Pc Tv Box + Luz Color Del Teclado Negro Idioma Español Latinoamérica,20.3,50.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1094762280,teclado,Mini Teclado Inalámbrico Touchpad Smart Tv Pc Tv Box + Luz Color Del Teclado Negro Idioma Español Latinoamérica,20.3,50.0,"iqr, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE1095190444,monitor,"Asus ROG PG27AQWP-W 26.5 "" - Gris",7999.0,0.0,"iqr, z",conservar: extremo plausible
+02,atípico detectado,MPE1095396078,audifonos,AirPods Max 2 - Azul,2599.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1095409096,audifonos,AirPods Max 2 - Azul medianoche,2599.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE1096436910,monitor,Monitor Samsung 49 Pulgadas Odyssey Oled G9 G93sd Dqhd 24,6588.0,0.0,"iqr, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE1096960508,mouse,Logitech M90 Negro 910-004053,22.0,0.0,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE1097698276,laptop,Laptop Hp 14 Pulgadas Intel N150 4 Ram 128 Ssd Ufs Oro Rosa Palido,1109.0,56.83,"kmeans, mahalanobis",conservar: extremo plausible
+02,atípico detectado,MPE636654529,monitor,Monitor Benq Pd2730s 27 5k Ips Thunderbolt 4 90w,6499.0,0.0,"iqr, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE636822319,audifonos,Auriculares Dt 770 Pro X Beyerdynamic Audífonos De Estudio Gris,1099.0,0.0,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE685395796,teclado,Mini Teclado Keyboard Led Inalámbrico Smart Tv Pc Touchpad,20.0,50.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE685395810,teclado,Mini Teclado Keyboard Inalámbrico Led Smart Tv Pc Touchpad,20.0,50.0,"iqr, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE706323386,mouse,Mouse Vertical Inalámbrico Yelandar D5 CHARGUER Ergonómico 6 Botones Negro,38.0,62.0,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE716994784,audifonos,"Shure Se846g2cl Audífonos Con Aislamiento De Sonido, Transp Transparente",3888.0,10.0,"iqr, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE734217124,teclado,Mini Teclado Inalámbrico Led Retroiluminado Negro con Touchpad,20.15,50.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE744670660,silla,Steelcase Leap Silla De Oficina Silla De Trabajo,19999.0,0.0,"iqr, z, kmeans, mahalanobis",conservar: extremo plausible
+02,atípico detectado,MPE744670670,silla,Flexispot Ergox Silla De Oficina Ergonómica De Alta Calidad,7259.0,0.0,"iqr, z",conservar: extremo plausible
+02,atípico detectado,MPE744709780,silla,Steelcase Amiar Silla De Trabajo Ergonómica Tela = Cielo;,14199.0,0.0,"iqr, z, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE744761710,silla,Efomao Silla Ejecutiva De Escritorio Para Oficina Con,6699.0,0.0,"iqr, z",conservar: extremo plausible
+02,atípico detectado,MPE744865692,silla,Colamy Silla De Oficina Con Reposapiés Retráctil Diseño,5629.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE757397358,silla,Silla Gamer Playseat Red Bull Fórmula 1 Negro,7399.0,33.05,"iqr, z, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE781342104,teclado,"Teclado Basico Usb Para Pc , En Español Generico Negro",20.0,0.0,"iqr, kmeans",conservar: extremo plausible
+02,atípico detectado,MPE785127210,audifonos,Apple AirPods Max - Morado,2399.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE787244006,mouse,Mouse táctil inalámbrico Apple Magic 2 A1657 blanco,496.0,0.0,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE790091062,audifonos,Audífonos Inalámbricos Qcy T13 Anc 2 Negro Bluetooth 5.3 30h de Uso Cancelación de Ruido Activa 28dB,70.96,66.21,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE796461982,laptop,notebook 2 En 1 Advance Cn4058 10.1 Celeron N4020 1.10 Ghz,879.0,0.0,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE803338004,silla,Heroset Silla De Oficina Ergonómicas Grandes Y Altas Sillas,4349.0,0.0,iqr,conservar: extremo plausible
+02,atípico detectado,MPE803377004,silla,Silla Gerencial Steelcase de Cuero Sintético en Grafito,6949.0,0.0,"iqr, z",conservar: extremo plausible
+02,atípico detectado,MPE834033636,audifonos,Audífonos Inalámbricos Xiaomi Redmi Buds 6 Play Negro,39.0,61.0,kmeans,conservar: extremo plausible
+02,atípico detectado,MPE959377798,laptop,Lenovo V15 G4 Ryzen 7300u 8gb Ram 1tb Ssd + 1tb Hdd Externo Color Gris,29000.0,0.0,"iqr, z, kmeans",excluir: error comprobable
+02,atípico detectado,MPE971507206,monitor,"Monitor Portátil Vilva V156F1 de 15.6"" Full HD IPS para Laptop",229.0,0.0,kmeans,conservar: extremo plausible
