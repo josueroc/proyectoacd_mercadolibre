@@ -52,6 +52,7 @@ notebooks/
   03_integracion_y_reduccion.ipynb
   04_transformacion_e_ingenieria_de_caracteristicas.ipynb
   05_analisis_y_visualizacion.ipynb
+  prueba_de_funcionamiento.ipynb           prueba del pipeline: ejecución, reproducibilidad y errores
   comun.py                                 rutas, estilo de figuras, evidencia y balance
   ACD_Proyecto_Parte_I.ipynb, generar_figuras*.ipynb   Parte I
 pipeline.py                                orquestador del pipeline de la Parte II
@@ -94,6 +95,11 @@ registros roto, nulos fuera de lo justificado), el pipeline se detiene, nombra e
 **Reproducibilidad.** Dos ejecuciones producen CSV idénticos: compare `data/final/manifiesto.json` o ejecute
 `git status data/` después de correr el pipeline. Los datos crudos nunca se modifican.
 
+**Prueba de funcionamiento.** `notebooks/prueba_de_funcionamiento.ipynb` ejecuta el pipeline completo y comprueba
+con `assert` seis cosas: que termina sin errores, que reproduce los mismos CSV, que el balance cuadra, que el
+dataset final cumple sus invariantes, que el almacén SQLite responde consultas y que un dato corrupto detiene el
+pipeline en la etapa correcta. Se entrega ejecutado, con sus salidas.
+
 **Documentos.** El informe, los diccionarios y la presentación se regeneran desde las salidas del pipeline:
 
 ```bash
@@ -123,6 +129,7 @@ presenta. Usa las fuentes Bahnschrift y Segoe UI, incluidas en Windows. Las foto
 | Carpeta `docs` con diccionario inicial y final | `docs/diccionarios/` |
 | Data assets: dataset final (CSV) y diccionario final (PDF) | `data/final/homeoffice_final.csv`, `docs/diccionarios/diccionario_final.pdf` |
 | Documento de presentación | `docs/parte_2/presentacion/Presentacion_Parte_II_DS3021.pptx` (y su PDF) |
+| Prueba del funcionamiento | `notebooks/prueba_de_funcionamiento.ipynb` |
 
 ## Correspondencia con el contenido del informe
 
