@@ -111,10 +111,21 @@ def coma_decimal(texto):
 
 
 # ---------------------------------------------------------------- escritura determinista
+def reintentar(escribir, intentos=5):
+    """Windows puede bloquear un instante un archivo recién escrito (antivirus, indexador): se reintenta."""
+    for intento in range(intentos):
+        try:
+            return escribir()
+        except OSError:
+            if intento == intentos - 1:
+                raise
+            time.sleep(1)
+
+
 def escribir_csv(df, ruta):
     """CSV en UTF-8, sin índice, con fin de línea y formato de fecha fijos (NFR-002)."""
-    df.to_csv(ruta, index=False, encoding='utf-8', lineterminator='\n',
-              date_format='%Y-%m-%d %H:%M:%S')
+    reintentar(lambda: df.to_csv(ruta, index=False, encoding='utf-8', lineterminator='\n',
+                                 date_format='%Y-%m-%d %H:%M:%S'))
     return ruta
 
 
@@ -134,8 +145,8 @@ def registrar(seccion, **valores):
     """Guarda cifras en data/final/metricas.json bajo una sección; el informe y la presentación las leen de ahí."""
     datos = json.loads(METRICAS.read_text(encoding='utf-8')) if METRICAS.exists() else {}
     datos.setdefault(seccion, {}).update(json.loads(json.dumps(valores, default=_a_json)))
-    METRICAS.write_text(json.dumps(datos, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8',
-                        newline='\n')
+    texto = json.dumps(datos, ensure_ascii=False, indent=2, sort_keys=True) + '\n'
+    reintentar(lambda: METRICAS.write_text(texto, encoding='utf-8', newline='\n'))
 
 
 def leer_metricas():
@@ -166,15 +177,7 @@ def guardar_figura(fig, nombre, pregunta, lectura):
     """Guarda la figura y registra la pregunta que responde y su lectura analítica (constitución VI)."""
     assert pregunta.strip() and lectura.strip(), 'Cada figura necesita su pregunta y su interpretación.'
     lectura = coma_decimal(lectura)
-    # Windows puede bloquear un instante el PNG recién escrito (antivirus, indexador): se reintenta brevemente.
-    for intento in range(5):
-        try:
-            fig.savefig(FIGURAS / f'{nombre}.png', facecolor='white')
-            break
-        except OSError:
-            if intento == 4:
-                raise
-            time.sleep(1)
+    reintentar(lambda: fig.savefig(FIGURAS / f'{nombre}.png', facecolor='white'))
     registrar('figuras', **{nombre: {'pregunta': pregunta, 'lectura': lectura}})
     plt.show()
     print(f'Lectura: {lectura}')
